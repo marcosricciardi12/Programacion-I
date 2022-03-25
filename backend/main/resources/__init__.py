@@ -1,2 +1,2 @@
-from .Poema import Poema as PoemaResource
-from .Poema import Poemas as PoemasResource
+from .Poem import Poem as PoemResource
+from .Poem import Poems as PoemsResource

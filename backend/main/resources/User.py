@@ -6,9 +6,7 @@ USERS = {
     2: {'user': 'sky1998', 'email': 'anna.tesla@mail.com'},
 }
 
-#Recurso User
 class User(Resource):
-    #Obtener recurso
     def get(self, id):
         if int(id) in USERS:
             return USERS[int(id)]
@@ -29,7 +27,6 @@ class User(Resource):
         return 'User not found', 404
 
 class Users(Resource):
-
     def get(self):
         return USERS
         

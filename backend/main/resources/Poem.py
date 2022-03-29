@@ -7,7 +7,6 @@ POEMS = {
 }
 
 class Poem(Resource):
-    
     def get(self, id):
         if int(id) in POEMS:
             return POEMS[int(id)]
@@ -28,7 +27,6 @@ class Poem(Resource):
         return 'Poem to edit does not exist', 404
 
 class Poems(Resource):
-
     def get(self):
         return POEMS
 
@@ -37,4 +35,3 @@ class Poems(Resource):
         id = int(max(POEMS.keys())) + 1
         POEMS[id] = poem
         return POEMS[id], 201
-

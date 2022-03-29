@@ -7,7 +7,6 @@ REVIEWS = {
 }
 
 class Review(Resource):
-
     def get(self, id):
         if int(id) in REVIEWS:
             return REVIEWS[int(id)]
@@ -20,7 +19,6 @@ class Review(Resource):
         return 'review to remove not exist', 404
 
 class Reviews(Resource):
-    
     def get(self):
         return REVIEWS
 

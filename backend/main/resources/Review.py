@@ -1,29 +1,33 @@
 from flask_restful import Resource
-from flask import request
+from flask import request, jsonify
+from .. import db
+from main.models import ReviewModel
 
-REVIEWS = {
-    1: {'review': 'Good', 'mark': '3'},
-    2: {'review': 'Excelent', 'mark': '5'},
-}
+
 
 class Review(Resource):
     def get(self, id):
-        if int(id) in REVIEWS:
-            return REVIEWS[int(id)]
-        return 'review not exist', 404
+
+        review = db.session.query(ReviewModel).get_or_404(id)
+        return review.to_json()
+
 
     def delete(self, id):
-        if int(id) in REVIEWS:
-            del REVIEWS[int(id)]
-            return 'review has been successfully deleted', 204
-        return 'review to remove not exist', 404
+
+        review = db.session.query(ReviewModel).get_or_404(id)
+        db.session.delete(review)
+        db.session.commit()
+        return '', 204
+
 
 class Reviews(Resource):
     def get(self):
-        return REVIEWS
+        reviews = db.session.query(ReviewModel).all()
+        return jsonify([review.to_json_short() for review in reviews])
+
 
     def post(self):
-        review = request.get_json()
-        id = int(max(REVIEWS.keys())) + 1
-        REVIEWS[id] = review
-        return REVIEWS[id], 201
+        review = ReviewModel.from_json(request.get_json())
+        db.session.add(review)
+        db.session.commit()
+        return review.to_json(), 201

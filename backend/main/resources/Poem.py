@@ -12,7 +12,7 @@ class Poem(Resource):
         poem = db.session.query(PoemModel).get_or_404(id)
         db.session.delete(poem)
         db.session.commit()
-        return '', 204
+        return 'Poem deleted correctly.', 204
 
     def put(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)

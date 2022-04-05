@@ -1,37 +1,41 @@
 from flask_restful import Resource
-from flask import request
+from flask import request, jsonify
+from .. import db
+from main.models import UserModel
 
-USERS = {
-    1: {'user': 'stars2021', 'email': 'peter.amstrong@mail.com'},
-    2: {'user': 'sky1998', 'email': 'anna.tesla@mail.com'},
-}
 
+#Recurso usuario
 class User(Resource):
+    
+    #obtener recurso
     def get(self, id):
-        if int(id) in USERS:
-            return USERS[int(id)]
-        return 'User not exist', 404
+        user = db.session.query(UserModel).get_or_404(id)
+        return user.to_json()
 
+    #eliminar recurso
     def delete(self, id):
-        if int(id) in USERS:
-            del USERS[int(id)]
-            return 'User has been successfully deleted', 204
-        return 'User to remove not exist', 404
-
+        user = db.session.query(UserModel).get_or_404(id)
+        db.session.delete(user)
+        db.session.commit()
+        return 'User deleted', 204
+    
+    
     def put(self, id):
-        if int(id) in USERS:
-            user = USERS[int(id)]
-            data = request.get_json()
-            user.update(data)
-            return user, 201
-        return 'User not found', 404
+        user = db.session.query(UserModel).get_or_404(id)
+        data = request.get_json().items()
+        for key,value in data:
+            setattr(user,key,value)
+        db.session.add(user)
+        db.session.commit()
+        return 'User modified',user.to_json(), 201
 
 class Users(Resource):
     def get(self):
-        return USERS
+        users = db.session.query(UserModel).all()
+        return jsonify([user.to_json_short() for user in users])
         
     def post(self):
-        user = request.get_json()
-        id = int(max(USERS.keys())) + 1
-        USERS[id] = user
-        return USERS[id], 201
+        user = UserModel.from_json(request.get_json())
+        db.session.add(user)
+        db.session.commit()
+        return user.to_json(), 201

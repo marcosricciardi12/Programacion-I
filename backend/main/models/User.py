@@ -7,7 +7,7 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable= False)
     
     def __repr__(self):
-        return f'User: {self.user} , {self.email}'
+        return f'User: {self.user} , {self.email} ,{self.email} , {self.password}'
     
     def to_json(self):
         user_json = {

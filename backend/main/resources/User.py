@@ -27,7 +27,7 @@ class User(Resource):
             setattr(user,key,value)
         db.session.add(user)
         db.session.commit()
-        return 'User modified',user.to_json(), 201
+        return user.to_json(), 201
 
 class Users(Resource):
     def get(self):

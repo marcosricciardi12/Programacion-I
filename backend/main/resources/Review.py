@@ -17,7 +17,7 @@ class Review(Resource):
         review = db.session.query(ReviewModel).get_or_404(id)
         db.session.delete(review)
         db.session.commit()
-        return '', 204
+        return 'Review deleted', 204
 
 
 class Reviews(Resource):

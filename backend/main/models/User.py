@@ -5,6 +5,7 @@ class User(db.Model):
     user = db.Column(db.String(100), nullable= False)
     email = db.Column(db.String(100), nullable= False)
     password = db.Column(db.String(100), nullable= False)
+    admin = db.Column(db.Boolean, default=False, nullable=False)
     
     def __repr__(self):
         return f'User: {self.user} , {self.email} ,{self.email} , {self.password}'
@@ -14,6 +15,7 @@ class User(db.Model):
             'id': self.id,
             'user': str(self.user),
             'email': str(self.email),
+            'admin' : str(self.admin),
         }
         return user_json
     
@@ -32,8 +34,10 @@ class User(db.Model):
         user = user_json.get('user')
         email = user_json.get('email')
         password = user_json.get('password')
+        admin = user_json.get('admin')
         return User(id = id,
                     user = user,
                     email = email,
                     password = password,
+                    admin = admin
                     )

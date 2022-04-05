@@ -17,7 +17,7 @@ class User(Resource):
         user = db.session.query(UserModel).get_or_404(id)
         db.session.delete(user)
         db.session.commit()
-        return '', 204
+        return 'User deleted', 204
     
     
     def put(self, id):
@@ -27,7 +27,7 @@ class User(Resource):
             setattr(user,key,value)
         db.session.add(user)
         db.session.commit()
-        return user.to_json(), 201
+        return 'User modified',user.to_json(), 201
 
 class Users(Resource):
     def get(self):

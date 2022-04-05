@@ -6,4 +6,4 @@
 pyvenv.cfg
 .env
 **/__pycache__
-/course.db
+course.db

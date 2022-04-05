@@ -1,37 +1,35 @@
 from flask_restful import Resource
-from flask import request
-
-POEMS = {
-    1: {'title': 'Hola', 'date': '10/12/2020'},
-    2: {'title': 'Chau', 'date': '11/10/2021'},
-}
+from flask import request, jsonify
+from .. import db
+from main.models import PoemModel
 
 class Poem(Resource):
     def get(self, id):
-        if int(id) in POEMS:
-            return POEMS[int(id)]
-        return 'Poem not exist', 404
+        poem = db.session.query(PoemModel).get_or_404(id)
+        return poem.to_json()
 
     def delete(self, id):
-        if int(id) in POEMS:
-            del POEMS[int(id)]
-            return 'Poem has been deleted', 204
-        return 'Poem not exist', 404
+        poem = db.session.query(PoemModel).get_or_404(id)
+        db.session.delete(poem)
+        db.session.commit()
+        return '', 204
 
     def put(self, id):
-        if int(id) in POEMS:
-            poem = POEMS[int(id)]
-            data = request.get_json()
-            poem.update(data)
-            return poem, 201
-        return 'Poem to edit does not exist', 404
+        poem = db.session.query(PoemModel).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(poem, key, value)
+        db.session.add(poem)
+        db.session.commit()
+        return poem.to_json() , 201
 
 class Poems(Resource):
     def get(self):
-        return POEMS
+        poems = db.session.query(PoemModel).all()
+        return jsonify([poem.to_json_short() for poem in poems])
 
     def post(self):
-        poem = request.get_json()
-        id = int(max(POEMS.keys())) + 1
-        POEMS[id] = poem
-        return POEMS[id], 201
+        poem = PoemModel.from_json(request.get_json())
+        db.session.add(poem)
+        db.session.commit()
+        return poem.to_json(), 201

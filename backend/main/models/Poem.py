@@ -4,7 +4,10 @@ class Poem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', back_populates = "poems", uselist = False, single_parent = True)
+
+
 
     def __repr__(self):
         return '<Poem: %r %r >' % (self.title, self.content, self.user_id)
@@ -14,7 +17,7 @@ class Poem(db.Model):
             'id': self.id,
             'title': str(self.title),
             'content': str(self.content),
-            'user_id': self.user_id
+            'user': self.user.to_json()
         }
         return poem_json
 

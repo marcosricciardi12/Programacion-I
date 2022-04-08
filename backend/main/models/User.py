@@ -6,16 +6,19 @@ class User(db.Model):
     email = db.Column(db.String(100), nullable= False)
     password = db.Column(db.String(100), nullable= False)
     admin = db.Column(db.Boolean, default=False, nullable=False)
+    poems = db.relationship('Poem', back_populates = 'user', cascade = 'all, delete-orphan')
     
     def __repr__(self):
         return f'User: {self.user} , {self.email} ,{self.email} , {self.password}'
     
-    def to_json(self):
+    def to_json(self): 
+        poems = [poem.to_json_short() for poem in self.poems]
         user_json = {
             'id': self.id,
             'user': str(self.user),
             'email': str(self.email),
             'admin' : str(self.admin),
+            'poems' : poems
         }
         return user_json
     

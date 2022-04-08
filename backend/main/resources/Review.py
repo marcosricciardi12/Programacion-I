@@ -23,7 +23,7 @@ class Review(Resource):
 class Reviews(Resource):
     def get(self):
         reviews = db.session.query(ReviewModel).all()
-        return jsonify([review.to_json_short() for review in reviews])
+        return jsonify([review.to_json() for review in reviews])
 
 
     def post(self):

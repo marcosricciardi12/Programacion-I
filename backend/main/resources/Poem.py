@@ -32,4 +32,4 @@ class Poems(Resource):
         poem = PoemModel.from_json(request.get_json())
         db.session.add(poem)
         db.session.commit()
-        return poem.to_json(), 201
+        return poem.to_json_short(), 201

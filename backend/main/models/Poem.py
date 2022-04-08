@@ -1,23 +1,28 @@
 from .. import db
+from datetime import datetime
 
 class Poem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('User', back_populates = "poems", uselist = False, single_parent = True)
-
+    post_date = db.Column(db.DateTime, nullable = False, default = datetime.now())
+    user = db.relationship('User', back_populates = "poems", uselist = False, single_parent = True) # Un Poema tiene un Usuario
+    reviews = db.relationship('Review', back_populates = "poem", cascade = 'all, delete-orphan') # Un Poema tiene n reviews
 
 
     def __repr__(self):
         return '<Poem: %r %r >' % (self.title, self.content, self.user_id)
 
     def to_json(self):
+        reviews = [review.to_json_reviewpoem() for review in self.reviews]
         poem_json = {
             'id': self.id,
             'title': str(self.title),
             'content': str(self.content),
-            'user': self.user.to_json()
+            'user': self.user.to_json_onlyname(),
+            'post_date': self.post_date.strftime("%Y-%m-%d  %H:%M:%S"),
+            'reviews': reviews
         }
         return poem_json
 

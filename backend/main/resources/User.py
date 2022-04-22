@@ -2,7 +2,9 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import UserModel
-
+from main.models import PoemModel
+from main.models import ReviewModel
+from sqlalchemy import func
 
 #Recurso usuario
 class User(Resource):
@@ -31,8 +33,35 @@ class User(Resource):
 
 class Users(Resource):
     def get(self):
-        users = db.session.query(UserModel).all()
-        return jsonify([user.to_json_short() for user in users])
+        page = 1
+        per_page = 5
+
+        users = db.session.query(UserModel)
+        if request.get_json():
+            filters = request.get_json().items()
+            #Traigo todos los items del body del insomnia
+            for key, value in filters:
+                if key == "page":
+                    page = int(value)
+                if key == "per_page":
+                    per_page = int(value)
+                if key == "user":
+                    users = users.filter(UserModel.user.like("%" +  value + "%"))
+                if key == "poem_count":
+                    
+                    users = users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(PoemModel.id) >= value)
+                if key == "review_count":
+                    
+                    users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).having(func.count(ReviewModel.id) >= value)
+                if key == "order_by":
+                    if value == 'user[desc]':
+                        users = users.order_by(UserModel.user.desc())
+                    if value == 'user':
+                        users = users.order_by(UserModel.user)
+        #Ahora pagino, guarde la consulta parcial en users
+        users = users.paginate(page, per_page, True, 20) #Ahora no es una lista de lementos, es una paginacion
+        return jsonify({"users":[user.to_json_short() for user in users.items],
+        'total': users.total, 'pages': users.pages, 'page': page})
         
     def post(self):
         user = UserModel.from_json(request.get_json())

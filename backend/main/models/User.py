@@ -22,6 +22,7 @@ class User(db.Model):
             'admin' : str(self.admin),
             'poems' : poems,
             'reviews': reviews,
+            'poem_count': len(poems),
         }
         return user_json
     
@@ -29,6 +30,8 @@ class User(db.Model):
         user_json = {
             'id': self.id,
             'user': str(self.user),
+            'poem_count': len(self.poems),
+            'reviews_count': len(self.reviews),
             
         }
         return user_json

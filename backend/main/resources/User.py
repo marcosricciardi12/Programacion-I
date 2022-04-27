@@ -48,16 +48,20 @@ class Users(Resource):
                 if key == "user":
                     users = users.filter(UserModel.user.like("%" +  value + "%"))
                 if key == "poem_count":
-                    
                     users = users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(PoemModel.id) >= value)
                 if key == "review_count":
-                    
                     users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).having(func.count(ReviewModel.id) >= value)
                 if key == "order_by":
                     if value == 'user[desc]':
                         users = users.order_by(UserModel.user.desc())
                     if value == 'user':
                         users = users.order_by(UserModel.user)
+                    if value == 'cant_poem[desc]':
+                        users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).order_by(func.count(ReviewModel.id).desc())
+                    if value == 'cant_poem':
+                        users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).order_by(func.count(ReviewModel.id))
+
+                        # professors=professors.outerjoin(ProfessorModel.projects).group_by(ProfessorModel.id).order_by(func.count(ProjectModel.id).desc())
         #Ahora pagino, guarde la consulta parcial en users
         users = users.paginate(page, per_page, True, 20) #Ahora no es una lista de lementos, es una paginacion
         return jsonify({"users":[user.to_json_short() for user in users.items],

@@ -30,6 +30,7 @@ class Poem(db.Model):
         poem_json = {
             'id': self.id,
             'title': str(self.title),
+            'user': self.user.to_json_onlyname(),
         }
         return poem_json
 

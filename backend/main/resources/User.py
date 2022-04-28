@@ -48,7 +48,7 @@ class Users(Resource):
                 if key == "user":
                     users = users.filter(UserModel.user.like("%" +  value + "%"))
                 if key == "poem_count":
-                    users = users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(PoemModel.id) >= value)
+                    users = users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(PoemModel.id) >= int(value))
                 if key == "review_count":
                     users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).having(func.count(ReviewModel.id) >= int(value))
                 if key == "order_by":

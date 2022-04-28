@@ -55,6 +55,19 @@ class Poems(Resource):
                     poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).having(func.avg(ReviewModel.mark)>= value)
                 if key == "mark[lte]":
                     poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).having(func.avg(ReviewModel.mark)<= value)
+                if key == "order_by":
+                    if value == 'avg_mark':
+                        poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).order_by(func.avg(ReviewModel.mark))
+                    if value == 'avg_mark[desc]':
+                        poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).order_by(func.avg(ReviewModel.mark).desc())
+                    if value == 'date[desc]':
+                        poems = poems.order_by(PoemModel.post_date.desc())
+                    if value == 'date':
+                        poems = poems.order_by(PoemModel.post_date())
+                    if value == "title":
+                        poems = poems.order_by(PoemModel.title)
+                    if value == "title[desc]":
+                        poems = poems.order_by(PoemModel.title.desc())
 
         
         poems = poems.paginate(page, per_page, True, 20)

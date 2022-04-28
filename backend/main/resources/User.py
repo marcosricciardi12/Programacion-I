@@ -65,7 +65,9 @@ class Users(Resource):
         #Ahora pagino, guarde la consulta parcial en users
         users = users.paginate(page, per_page, True, 20) #Ahora no es una lista de lementos, es una paginacion
         return jsonify({"users":[user.to_json_short() for user in users.items],
-        'total': users.total, 'pages': users.pages, 'page': page})
+                        'total': users.total, 
+                        'pages': users.pages, 
+                        'page': page})
         
     def post(self):
         user = UserModel.from_json(request.get_json())

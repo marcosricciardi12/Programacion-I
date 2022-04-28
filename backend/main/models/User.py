@@ -22,7 +22,7 @@ class User(db.Model):
             'admin' : str(self.admin),
             'poems' : poems,
             'reviews': reviews,
-            'poem_count': len(poems),
+            'poem_count': len(self.poems),
         }
         return user_json
     

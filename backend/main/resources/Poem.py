@@ -6,6 +6,7 @@ from main.models import UserModel
 from main.models import PoemModel
 from main.models import ReviewModel
 from sqlalchemy import func
+from datetime import datetime
 
 
 class Poem(Resource):
@@ -46,14 +47,18 @@ class Poems(Resource):
                     poems = poems.filter(PoemModel.title.like("%" +  value + "%")) #funciona
                 if key == "user_writer":
                     poems = poems.filter(PoemModel.user).filter(UserModel.user.like("%" +  value + "%")) #funciona
-                if key == "date_gt":
-                    poems = poems.filter(PoemModel.post_date >= value)
-                if key == "mark_gt":
-                    poems == poems.filter(ReviewModel.mark).group_by(PoemModel.id).having(func.sum(ReviewModel.mark) / func.count(ReviewModel.user_id) >= value)
+                if key == "date[gte]":
+                    poems = poems.filter(PoemModel.post_date >= datetime.strptime(value, '%d/%m/%Y'))
+                if key == "date[lte]":
+                    poems = poems.filter(PoemModel.post_date <= datetime.strptime(value, '%d/%m/%Y'))
+                if key == "mark[gte]":
+                    poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).having(func.avg(ReviewModel.mark)>= value)
+                if key == "mark[lte]":
+                    poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).having(func.avg(ReviewModel.mark)<= value)
 
         
         poems = poems.paginate(page, per_page, True, 20)
-        return jsonify({"poemss":[poem.to_json_short() for poem in poems.items],
+        return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
                         'total': poems.total, 
                         'pages': poems.pages, 
                         'page': page})

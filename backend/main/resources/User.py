@@ -5,23 +5,27 @@ from main.models import UserModel
 from main.models import PoemModel
 from main.models import ReviewModel
 from sqlalchemy import func
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
 
 #Recurso usuario
 class User(Resource):
     
     #obtener recurso
+    @jwt_required(optional=True)
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         return user.to_json()
 
     #eliminar recurso
+    # @admin_required
     def delete(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         db.session.delete(user)
         db.session.commit()
         return 'User deleted', 204
     
-    
+    @jwt_required()
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         data = request.get_json().items()
@@ -32,6 +36,7 @@ class User(Resource):
         return user.to_json(), 201
 
 class Users(Resource):
+
     def get(self):
         page = 1
         per_page = 5
@@ -68,7 +73,8 @@ class Users(Resource):
                         'total': users.total, 
                         'pages': users.pages, 
                         'page': page})
-        
+
+    # @admin_required    
     def post(self):
         user = UserModel.from_json(request.get_json())
         db.session.add(user)

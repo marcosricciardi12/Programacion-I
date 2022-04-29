@@ -1,4 +1,5 @@
 from .. import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -8,6 +9,17 @@ class User(db.Model):
     admin = db.Column(db.Boolean, default=False, nullable=False)
     poems = db.relationship('Poem', back_populates = 'user', cascade = 'all, delete-orphan') #Un usuario tiene n poemas
     reviews = db.relationship('Review', back_populates = 'user', cascade = 'all, delete-orphan') #Un usuario tiene n reviews
+
+    @property
+    def plain_password(self):
+        raise AttributeError ("No permitido")
+    
+    @plain_password.setter
+    def plain_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def validate_pass(self, password):
+        return check_password_hash(self.password, password)
 
     def __repr__(self):
         return f'User: {self.user} , {self.email} ,{self.email} , {self.password}'
@@ -53,6 +65,6 @@ class User(db.Model):
         return User(id = id,
                     user = user,
                     email = email,
-                    password = password,
+                    plain_password = password,
                     admin = admin
                     )

@@ -62,9 +62,9 @@ class Users(Resource):
                     if value == 'user':
                         users = users.order_by(UserModel.user)
                     if value == 'cant_poem[desc]':
-                        users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).order_by(func.count(ReviewModel.id).desc())
+                        users = users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(UserModel.poems).desc())
                     if value == 'cant_poem':
-                        users = users.outerjoin(UserModel.reviews).group_by(UserModel.id).order_by(func.count(ReviewModel.id))
+                        users = users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(UserModel.poems))
 
                         # professors=professors.outerjoin(ProfessorModel.projects).group_by(ProfessorModel.id).order_by(func.count(ProjectModel.id).desc())
         #Ahora pagino, guarde la consulta parcial en users

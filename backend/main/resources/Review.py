@@ -1,33 +1,62 @@
+import re
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import ReviewModel
-
-
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
+from main.models import UserModel
+from main.models import PoemModel
+from main.models import ReviewModel
 
 class Review(Resource):
+
+    
     def get(self, id):
 
         review = db.session.query(ReviewModel).get_or_404(id)
         return review.to_json()
 
-
+    @jwt_required()
     def delete(self, id):
-
+        token_id = get_jwt_identity()
+        claims = get_jwt()
         review = db.session.query(ReviewModel).get_or_404(id)
-        db.session.delete(review)
-        db.session.commit()
-        return 'Review deleted', 204
+        if not claims:
+            claims = {'admin': False}
+        if token_id == review.user_id or claims['admin']:
+            db.session.delete(review)
+            db.session.commit()
+            return 'Review deleted', 204    
+        else:
+            return "You don't have permission to delete this review", 403
 
 
 class Reviews(Resource):
+
     def get(self):
         reviews = db.session.query(ReviewModel).all()
         return jsonify([review.to_json() for review in reviews])
 
-
+    @jwt_required()
     def post(self):
+        review_user_id = get_jwt_identity()
+        reviews = db.session.query(ReviewModel).all()
+        has_review_from_this_user = False
+        
+        #Necesito el id del usuario que hizo el poema que se va a calificar
+        #Necesito los id de los usuarios que ya calificaron al poema
+        #El dueño del token va a ser el creador del poema
         review = ReviewModel.from_json(request.get_json())
-        db.session.add(review)
-        db.session.commit()
-        return review.to_json(), 201
+        review.user_id = review_user_id
+        for rew in reviews:
+            if rew.user_id == review_user_id and rew.poem_id == review.poem_id:
+                has_review_from_this_user = True
+                break
+        poem = db.session.query(PoemModel).get_or_404(review.poem_id)
+        user_poem_id = poem.user_id
+        if review_user_id != user_poem_id and not has_review_from_this_user:
+            db.session.add(review)
+            db.session.commit()
+            return review.to_json(), 201
+        else:
+            return 'You cannot auto evaluate or make more of one review in this poem', 403

@@ -6,5 +6,5 @@ from main import db
 
 if __name__ == '__main__':
 	db.create_all()
-	app.run(port = os.getenv("PORT"), debug = False)
+	app.run(port = os.getenv("PORT"), debug = True)
 #Cambios

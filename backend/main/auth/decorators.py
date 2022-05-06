@@ -8,12 +8,9 @@ def admin_required(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         #Verificar que el JWT es correcto
-        print("Estoy ANTES de verify jwt in")
         verify_jwt_in_request()
-        print("Estoy DESPUES de verify jwt in")
         #Obtener claims de adentro del JWT
         claims = get_jwt()
-        print("Pase el get_jwt")
         #Verificar que el rol sea admin
         if claims['admin']:
             #Ejecutar función
@@ -26,13 +23,11 @@ def admin_required(fn):
 @jwt.user_identity_loader
 def user_identity_lookup(user):
     #Definir ID como atributo identificatorio
-    print("ESTOY EN USER IDENTITY")
     return user.id
 
 #Define que atributos se guardarán dentro del token
 @jwt.additional_claims_loader
 def add_claims_to_access_token(user):
-    print("ESTOY EN CLAIMS")
     claims = {
         'admin': user.admin,
         'id': user.id,

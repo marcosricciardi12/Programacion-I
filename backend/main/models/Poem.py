@@ -31,6 +31,8 @@ class Poem(db.Model):
             'id': self.id,
             'title': str(self.title),
             'user': self.user.to_json_onlyname(),
+            'post_date': self.post_date.strftime("%Y-%m-%d  %H:%M:%S"),
+            'reviews': len(self.reviews)
         }
         return poem_json
 

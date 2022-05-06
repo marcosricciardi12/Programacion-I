@@ -12,7 +12,6 @@ jwt = JWTManager()
 def create_app():
 	app = Flask(__name__)
 	load_dotenv()
-
 	if not os.path.exists(os.getenv('DATABASE_PATH') + os.getenv('DATABASE_NAME')):
 		os.mknod(os.getenv('DATABASE_PATH') + os.getenv('DATABASE_NAME'))
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -29,6 +28,7 @@ def create_app():
 	app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 	app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
 	jwt.init_app(app)
+	
 	from main.auth import routes
 	app.register_blueprint(routes.auth)
 	return app

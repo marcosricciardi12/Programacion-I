@@ -88,7 +88,7 @@ class Users(Resource):
                         'pages': users.pages, 
                         'page': page})
 
-    # @admin_required    
+    @admin_required    
     def post(self):
         user = UserModel.from_json(request.get_json())
         db.session.add(user)

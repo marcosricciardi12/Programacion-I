@@ -1,4 +1,5 @@
 import re
+from urllib import response
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
@@ -7,6 +8,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from main.models import UserModel
 from main.models import PoemModel
 from main.models import ReviewModel
+from main.mail.functions import sendmail
 
 class Review(Resource):
 
@@ -55,8 +57,13 @@ class Reviews(Resource):
         poem = db.session.query(PoemModel).get_or_404(review.poem_id)
         user_poem_id = poem.user_id
         if review_user_id != user_poem_id and not has_review_from_this_user:
-            db.session.add(review)
-            db.session.commit()
-            return review.to_json(), 201
+            try:
+                db.session.add(review)
+                db.session.commit()
+                result = sendmail([review.poem.user.email], 'Nueva reseña!!', 'new_review', review = review)
+                return review.to_json(), 201
+            except Exception as error:
+                # db.session.rollback()
+                return str(error), 409
         else:
             return 'You cannot auto evaluate or make more of one review in this poem', 403

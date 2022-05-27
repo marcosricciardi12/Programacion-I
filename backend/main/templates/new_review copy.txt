@@ -1,0 +1,5 @@
+Hola {{review.poem.user.user}}!
+Tu poema {{review.poem.title}} recibió una calificación!
+
+Puntaje: {{review.mark}}
+Opinión: {{review.comment}}

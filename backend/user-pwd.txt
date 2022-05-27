@@ -1,0 +1,69 @@
+tokens
+
+admin admin
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"admin","password":"admin"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzMyMiwianRpIjoiYTFhMGVhOGMtMjVhNC00MTAzLTk4NmItODAwZDEyMWZiYzFlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjUzNjE3MzIyLCJleHAiOjE2NTM2MjA5MjIsImFkbWluIjp0cnVlLCJpZCI6MSwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSJ9._06CxnI1H5hTr-zkOuAYO93ojtsFntrUv_2btlsWQaQ
+
+ma.ricciardi marcos
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"ma.ricciardi","password":"marcos"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzQwOSwianRpIjoiYWU4YWRjMzYtODlkZi00YWIxLWI1MzctMTdkZjYwZWJkNWJjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjUzNjE3NDA5LCJleHAiOjE2NTM2MjEwMDksImFkbWluIjp0cnVlLCJpZCI6MiwiZW1haWwiOiJtYXJjb3MucmljY2lhcmRpQG1haWwuY29tIn0.pDklgh-oak9EN9X6SszfO3oGtushTj6fnqIEcNeMb6Y
+
+espadin agustin
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"espadin","password":"agustin"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzQ0MCwianRpIjoiNzQzNmVjMmYtMjM2My00MzZmLTllNWUtYzllYjQ3MmVhZGNmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NCwibmJmIjoxNjUzNjE3NDQwLCJleHAiOjE2NTM2MjEwNDAsImFkbWluIjpmYWxzZSwiaWQiOjQsImVtYWlsIjoiYS5hZ3Vlcm9AbWFpbC5jb20ifQ.i7_94g327HcLRykp1o8Uo2Viawfjrp2ClS6IKMkns_0
+
+oberwelt nicolas
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"oberwelt","password":"nicolas"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzQ3MCwianRpIjoiYWY3YzJmOTUtY2M3YS00OTI5LThjNDEtNzRkNjQ5OGY4MzY5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNjUzNjE3NDcwLCJleHAiOjE2NTM2MjEwNzAsImFkbWluIjpmYWxzZSwiaWQiOjMsImVtYWlsIjoibi50YWNldHRhQG1haWwuY29tIn0.2ykeqxX2ledV5lNOo7dFprM57aVIHzt6chfs1b5ac3c
+
+
+flaco amor
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"flaco","password":"amor"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzU0MCwianRpIjoiNDU2ZTkwM2EtMTdjZi00OGEyLWI4MGItYjEyNWFjMGQ3Mjg2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjUzNjE3NTQwLCJleHAiOjE2NTM2MjExNDAsImFkbWluIjpmYWxzZSwiaWQiOjUsImVtYWlsIjoiYWwuc3BpbkBtYWlsLmNvbSJ9.FONsnyQqLkYwlyUQN5m8dSdOX6QZ61Q5O0l0QtAgQOU
+
+
+
+soda profugos
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"soda","password":"profugos"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzU2MSwianRpIjoiZTdlNTUwNTUtMTBiYy00OTdlLWIwNTItYzdhN2YyODk1ODA3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NiwibmJmIjoxNjUzNjE3NTYxLCJleHAiOjE2NTM2MjExNjEsImFkbWluIjpmYWxzZSwiaWQiOjYsImVtYWlsIjoiZ3VzQG1haWwuY29tIn0.DlR0_k15cbfNFfRNxBGGovQHXrHUq3Ek-oYuG9SNK0o
+
+anis manlomataron
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"user":"anis","password":"manlomataron"}' \
+  http://localhost:5000/auth/login
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzYxNzU4NSwianRpIjoiNGRlMWY3ZjctYmQwNS00YzEwLWFkMWMtYTkxODAxYzE4NDFiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NywibmJmIjoxNjUzNjE3NTg1LCJleHAiOjE2NTM2MjExODUsImFkbWluIjpmYWxzZSwiaWQiOjcsImVtYWlsIjoiYW5vbmltb0BtYWlsLmNvbSJ9.6i1mkzhTPhH0nZpJ2vAp7tJqM3pkGIqyyqX8mSTfSxw
+
+

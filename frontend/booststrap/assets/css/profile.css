@@ -1,0 +1,33 @@
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../assets/img/pexels-suzy-hazelwood-1560093.jpg");
+}
+
+#container {
+  background-color: rgba(0,0,0,0.46);
+}
+
+#navbar {
+  background-color: rgba(13,104,240,0.5);
+}
+
+#contdiv {
+  margin-top: 10px;
+}
+
+#contbody {
+  background-color: rgba(255,255,255,0.32);
+}
+
+#final {
+  margin-bottom: 20px;
+}
+
+#submit {
+  margin-right: 10px;
+  background-color: var(--bs-green);
+}
+
+#cancel {
+  background-color: #a45651;
+}
+

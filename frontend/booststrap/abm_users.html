@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Table - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/abm_users.css">
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><img width="51" height="49" src="assets/img/001-feather.png"><a class="navbar-brand" href="#"><span style="color: rgb(255, 255, 255);">&nbsp;Poems</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse text-end" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#"><span style="color: rgb(255, 255, 255);">Main</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span style="color: rgba(255, 255, 255, 0.7);">Log Out</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" id="back">
+        <h3 class="text-dark mb-4" id="heading"><span style="color: rgb(255, 255, 255);">Admin users panel</span></h3>
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold"></p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 text-nowrap">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-end dataTables_filter" id="dataTable_filter"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"><label class="form-label"></label></div>
+                    </div>
+                </div>
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Password</th>
+                                <th>email</th>
+                                <th>poems</th>
+                                <th>registration date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Airi Satou</td>
+                                <td>1234</td>
+                                <td>asdfa@asdfa.com</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Angelica Ramos</td>
+                                <td>314</td>
+                                <td>asdf@gmail.com</td>
+                                <td>47</td>
+                                <td>2009/10/09<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Ashton Cox</td>
+                                <td>asdfa</td>
+                                <td>hola@gasdf.com</td>
+                                <td>66</td>
+                                <td>2009/01/12<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Bradley Greer</td>
+                                <td>12341</td>
+                                <td>london@gmail.com<br></td>
+                                <td>41</td>
+                                <td>2012/10/13<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Brenden Wagner</td>
+                                <td>asdfasd</td>
+                                <td>francisco@gmail.com<br></td>
+                                <td>28</td>
+                                <td>2011/06/07<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Brielle Williamson</td>
+                                <td>412341</td>
+                                <td>ytok@gmail.com<br></td>
+                                <td>61</td>
+                                <td>2012/12/02<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Bruno Nash<br></td>
+                                <td>asdfasdf</td>
+                                <td>amil@gmail.com<br></td>
+                                <td>38</td>
+                                <td>2011/05/03<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Caesar Vance</td>
+                                <td>12341</td>
+                                <td>new@gmail.com<br></td>
+                                <td>21</td>
+                                <td>2011/12/12<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Cara Stevens</td>
+                                <td>asdfad</td>
+                                <td>asdf@gmail.com<br></td>
+                                <td>46</td>
+                                <td>2011/12/06<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Cedric Kelly</td>
+                                <td>4321431</td>
+                                <td>asdfa@gmail.com<br></td>
+                                <td>22</td>
+                                <td>2012/03/29<br></td>
+                                <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-primary" id="delete" type="button"><i class="fas fa-trash-alt"></i></button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                    </div>
+                    <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination">
+                                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

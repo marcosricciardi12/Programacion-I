@@ -1,3 +1,9 @@
+body {
+  background: url("../../assets/img/pexels-min-an-1448709.jpg");
+  background-size:cover; 
+  background-position: center;
+}
+
 .bs-icon {
   --bs-icon-size: .75rem;
   display: flex;
@@ -53,10 +59,6 @@
 
 .bs-icon.bs-icon-circle {
   border-radius: 50%;
-}
-
-body {
-  background: url("../../assets/img/pexels-min-an-1448709.jpg");
 }
 
 .navbar {

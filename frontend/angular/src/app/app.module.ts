@@ -9,6 +9,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PoemComponent } from './components/poem/poem.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { PagesComponent } from './components/pages/pages.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ReviewComponent } from './components/review/review.component';
+import { SingupComponent } from './components/singup/singup.component';
+import { NewpoemComponent } from './components/newpoem/newpoem.component';
+import { AbmpoemsComponent } from './components/abmpoems/abmpoems.component';
+import { AbmusersComponent } from './components/abmusers/abmusers.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +25,13 @@ import { PagesComponent } from './components/pages/pages.component';
     NavbarComponent,
     PoemComponent,
     SearchbarComponent,
-    PagesComponent
+    PagesComponent,
+    ProfileComponent,
+    ReviewComponent,
+    SingupComponent,
+    NewpoemComponent,
+    AbmpoemsComponent,
+    AbmusersComponent
   ],
   imports: [
     BrowserModule,

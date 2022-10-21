@@ -1,0 +1,23 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1558210834-473f430c09ac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'); 
+    background-size:cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.recuadro_poems {
+	height: 33rem;
+	overflow-y: scroll;
+}
+
+.fijar_navnar{
+    height: 10px;
+    width: 50px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}

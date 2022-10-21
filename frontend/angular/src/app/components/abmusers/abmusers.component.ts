@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
+import { GetService } from './../../services/users/get.service'
 
 @Component({
   selector: 'app-abmusers',
@@ -9,10 +11,18 @@ import { Component, OnInit } from '@angular/core';
 ]
 })
 export class AbmusersComponent implements OnInit {
-
-  constructor() { }
+  arrayUsuarios:any;
+  constructor(
+    private router: Router,
+    private getService: GetService
+  ) { }
 
   ngOnInit(): void {
+    
+    this.getService.getUsers().subscribe((data:any) =>{
+      console.log('JSON data: ', data);
+      this.arrayUsuarios = data.users;
+    })
   }
 
 }

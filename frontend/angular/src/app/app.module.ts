@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -15,7 +14,7 @@ import { SingupComponent } from './components/singup/singup.component';
 import { NewpoemComponent } from './components/newpoem/newpoem.component';
 import { AbmpoemsComponent } from './components/abmpoems/abmpoems.component';
 import { AbmusersComponent } from './components/abmusers/abmusers.component';
-
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,7 +34,8 @@ import { AbmusersComponent } from './components/abmusers/abmusers.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

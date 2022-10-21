@@ -2,6 +2,9 @@ body {
   background: url("../../assets/img/pexels-min-an-1448709.jpg");
   background-size:cover; 
   background-position: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .bs-icon {

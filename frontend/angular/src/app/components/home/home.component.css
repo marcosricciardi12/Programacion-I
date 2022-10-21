@@ -8,7 +8,11 @@ body {
     width: 100%;
     position: absolute;
 }
-
+.center_scroll{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 .recuadro_poems {
 	height: 33rem;
 	overflow-y: scroll;
@@ -18,6 +22,6 @@ body {
     height: 10px;
     width: 50px;
     position: -webkit-sticky;
-    position: sticky;
+
     top: 0;
 }

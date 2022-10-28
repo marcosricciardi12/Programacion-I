@@ -54,13 +54,26 @@ class Users(Resource):
 
     def get(self):
         page = 1
-        per_page = 5
-
+        per_page = 20
         users = db.session.query(UserModel)
-        if request.get_json():
-            filters = request.get_json().items()
+        keys = [
+            'page',
+            'per_page',
+            'user',
+            'poem_count',
+            'review_count',
+            'review_count',
+            'order_by'
+        ]
+        filters = {}
+        for key in keys:
+            arg = request.args.get(key)
+            if arg != None:
+                filters.update({key: arg})
+
+        if filters:
             #Traigo todos los items del body del insomnia
-            for key, value in filters:
+            for key, value in filters.items():
                 if key == "page":
                     page = int(value)
                 if key == "per_page":

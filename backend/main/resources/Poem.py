@@ -48,13 +48,28 @@ class Poems(Resource):
     @jwt_required(optional=True)
     def get(self):
         page = 1
-        per_page = 5
+        per_page = 20
         user_id = get_jwt_identity()
         poems = db.session.query(PoemModel)
-        if request.get_json():
-            filters = request.get_json().items()
-            
-            for key, value in filters:
+        keys = [
+            'page',
+            'per_page',
+            'title',
+            'user_writer',
+            'date[gte]',
+            'date[lte]',
+            'mark[gte]',
+            'mark[lte]',
+            'order_by'
+        ]
+        filters = {}
+        for key in keys:
+            arg = request.args.get(key)
+            if arg != None:
+                filters.update({key: arg})
+
+        if filters:
+            for key, value in filters.items():
                 if key == "page":
                     page = int(value)
                 if key == "per_page":

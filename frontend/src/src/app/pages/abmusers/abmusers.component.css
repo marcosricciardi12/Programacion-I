@@ -1,0 +1,26 @@
+.navbar {
+    background-color: rgba(1,15,51,0.5);
+  }
+  
+body {
+    background: url("../../../assets/img/pexels-instawalli-176851.jpg");
+    background-size:cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+  .recuadro_users {
+    height: 33rem;
+    overflow-y: scroll;
+  }
+  #delete {
+    margin-left: 5px;
+    background-color: var(--bs-red);
+  }
+  
+  #heading {
+    padding-top: 10px;
+  }

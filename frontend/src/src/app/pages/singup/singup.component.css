@@ -1,0 +1,20 @@
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../../assets/img/desktop.jpg");
+    background-size:cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+  
+  .navbar {
+    background-color: rgba(13,104,240,0.5);
+  }
+  
+  #navdiv {
+    margin-bottom: 20px;
+  }
+  
+  

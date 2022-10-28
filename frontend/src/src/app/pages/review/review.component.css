@@ -1,0 +1,15 @@
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../../assets/img/reading.jpg");
+    background-size: cover;
+  }
+  
+  .navbar {
+    background-color: rgba(13,104,240,0.5);
+  }
+  
+  #backcolor {
+    background-color: rgba(255,255,255,0.86);
+    margin-top: 20px;
+  }
+  
+  

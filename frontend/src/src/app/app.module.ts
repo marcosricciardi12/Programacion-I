@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PoemComponent } from './components/poem/poem.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
-import { PagesComponent } from './components/pages/pages.component';
 import { HttpClientModule } from "@angular/common/http";
 import { PoemsService } from './services/poems/poems.service';
 import { UsersService } from './services/users/users.service';
@@ -19,6 +18,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { SingupComponent } from './pages/singup/singup.component';
 import { UserComponent } from './components/user/user.component';
+import { PagesComponent } from './components/pages/pages.component';
 
 @NgModule({
   declarations: [

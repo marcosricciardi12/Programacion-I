@@ -12,6 +12,11 @@ body {
     width: 100%;
     position: absolute;
   }
+  .center_scroll{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
   .recuadro_users {
     height: 33rem;
     overflow-y: scroll;

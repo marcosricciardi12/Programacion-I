@@ -8,6 +8,11 @@ body {
   width: 100%;
   position: absolute;
 }
+.center_scroll{
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
 #container {
   background-color: rgba(0,0,0,0.46);

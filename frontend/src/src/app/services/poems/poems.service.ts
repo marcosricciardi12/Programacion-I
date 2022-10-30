@@ -10,7 +10,7 @@ export class PoemsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getPoems() {
-    return this.httpClient.get(this.url);
+  getPoems(params:any) {
+    return this.httpClient.get(this.url, {params});
   }
 }

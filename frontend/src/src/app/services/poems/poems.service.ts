@@ -8,6 +8,7 @@ import { Observable, take } from 'rxjs';
 export class PoemsService {
 
   url = "poems"
+  url_i = "poem"
 
   constructor(private httpClient: HttpClient) { }
   
@@ -36,5 +37,14 @@ export class PoemsService {
       'Authorization': `Bearer ${auth_token}`
     });
     return  this.httpClient.post(this.url, dataPoem, {headers: headers}).pipe(take(1));
+  }
+
+  deletePoem(id: number) {
+    let auth_token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    });
+    return  this.httpClient.delete(this.url_i + "/" + id.toString(), {headers: headers});
   }
 }

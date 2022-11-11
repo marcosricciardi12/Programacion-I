@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UsersService } from 'src/app/services/users/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-singup',
@@ -27,17 +28,36 @@ export class SingupComponent implements OnInit {
    });
   }
   register(dataLogin:any) {
-    this.userService.createUser(dataLogin).subscribe({
-      next: (rta) => {
-        alert('Usuario ' + rta.user + ' creado exitosamente');
-        this.router.navigate(['/abmusers']);
-      }, error: (error) =>{
-        alert('No se pudo crear el usuario');
-        console.log('error: ', error);
-      }, complete: () => {
-        console.log('Termino');
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.userService.createUser(dataLogin).subscribe({
+          next: (rta) => {
+            Swal.fire('Saved!', 'Usuario ' + rta.user + ' creado exitosamente', 'success')
+            this.router.navigate(['/abmusers']);
+          }, error: (error) =>{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'No se pudo crear el usuario!',
+              footer: '<a href="">Why do I have this issue?</a>'
+            })
+            console.log('error: ', error);
+          }, complete: () => {
+            console.log('Termino');
+          }
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
       }
     })
+    
   }
 
 
@@ -54,11 +74,21 @@ export class SingupComponent implements OnInit {
           this.register({user, password, email});
         }
         else {
-          alert("Las contraseñas ingresadas no coinciden!")
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Las contraseñas ingresadas no coinciden!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
         }
       }
       else{
-        alert("Formulario invalido")
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: 'Formulario incompleto!',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
       }
     }  
 }

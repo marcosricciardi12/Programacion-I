@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoemsService } from 'src/app/services/poems/poems.service';
+import Swal from 'sweetalert2';
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 @Component({
   selector: 'app-newpoem',
@@ -26,11 +31,25 @@ export class NewpoemComponent implements OnInit {
   }
   register(dataPoem:any) {
     this.poemService.createPoem(dataPoem).subscribe({
-      next: (rta) => {
-        alert('Poema' + rta.title + ' creado exitosamente');
+      next: async (rta) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Tu poema ' + rta.title + ' ha sido publicado',
+          showConfirmButton: false,
+          timer: 3000
+        });
+        await delay(3001);
         this.router.navigate(['/home']);
-      }, error: (error) =>{
-        alert('No se pudo crear el poema');
+      }, error: async (error) =>{
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'No se pudo publicar tu poema',
+          showConfirmButton: false,
+          timer: 3500
+        });
+        await delay(3500);
         console.log('error: ', error);
       }, complete: () => {
         console.log('Termino');
@@ -48,7 +67,11 @@ export class NewpoemComponent implements OnInit {
         this.register({title, content});
       }
       else{
-        alert("Formulario invalido")
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Faltan datos en el formulario!'
+          })
       }
     }  
 }

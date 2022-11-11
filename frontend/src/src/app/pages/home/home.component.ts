@@ -27,6 +27,13 @@ export class HomeComponent implements OnInit {
     return localStorage.getItem('token') || undefined;
  }
 
+ get isAdmin() {
+  let token = localStorage.getItem("token") || "";
+  let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
+
+  return decodedJWT.admin
+}
+
   getPoems(params:any) {
     this.params = params
     console.log('Params: ', this.params);

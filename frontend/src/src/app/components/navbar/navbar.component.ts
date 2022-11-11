@@ -18,6 +18,13 @@ export class NavbarComponent implements OnInit {
   get isToken() {
     return localStorage.getItem('token') || undefined;
  }
+
+ get isAdmin() {
+  let token = localStorage.getItem("token") || "";
+  let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
+
+  return decodedJWT.admin
+}
  
  cerrarSesion() {
   this.authService.logout();

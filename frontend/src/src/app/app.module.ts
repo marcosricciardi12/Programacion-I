@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { PoemComponent } from './components/poem/poem.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { PoemsService } from './services/poems/poems.service';
@@ -19,6 +18,9 @@ import { ReviewComponent } from './pages/review/review.component';
 import { SingupComponent } from './pages/singup/singup.component';
 import { UserComponent } from './components/user/user.component';
 import { PagesComponent } from './components/pages/pages.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PoemsComponent } from './pages/poems/poems.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,6 @@ import { PagesComponent } from './components/pages/pages.component';
     HomeComponent,
     LoginComponent,
     NavbarComponent,
-    PoemComponent,
     SearchbarComponent,
     PagesComponent,
     ProfileComponent,
@@ -35,14 +36,18 @@ import { PagesComponent } from './components/pages/pages.component';
     NewpoemComponent,
     AbmpoemsComponent,
     AbmusersComponent,
-    UserComponent
+    UserComponent,
+    PoemsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [PoemsService, UsersService, ReviewsService],
+  providers: [PoemsService, UsersService, ReviewsService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

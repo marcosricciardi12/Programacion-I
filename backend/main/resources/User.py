@@ -41,17 +41,27 @@ class User(Resource):
         user = db.session.query(UserModel).get_or_404(id)
         data = request.get_json().items()
         token_id = get_jwt_identity()
-        if token_id == user.id:
+        claims = get_jwt()
+        if not claims:
+            claims = {'admin': False}
+        if token_id == user.id or claims['admin']:
             for key,value in data:
-                setattr(user,key,value)
+                if str(key) == 'admin':
+                    if claims['admin']:
+                        setattr(user,key,value)
+                    else:
+                        print("Only admin can modify admin permisions")
+                else:
+                    setattr(user,key,value)
             db.session.add(user)
             db.session.commit()
             return user.to_json(), 201
         else:
-            return 'Not allowed, only owner can modify', 403
+            return 'Not allowed, only owner or admin can modify', 403
 
 class Users(Resource):
 
+    @admin_required
     def get(self):
         page = 1
         per_page = 20
@@ -96,7 +106,7 @@ class Users(Resource):
 
         #Ahora pagino, guarde la consulta parcial en users
         users = users.paginate(page, per_page, True, 20) #Ahora no es una lista de lementos, es una paginacion
-        return jsonify({"users":[user.to_json_short() for user in users.items],
+        return jsonify({"users":[user.to_json_short_mail() for user in users.items],
                         'total': users.total, 
                         'pages': users.pages, 
                         'page': page})

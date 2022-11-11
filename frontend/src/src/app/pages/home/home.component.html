@@ -7,18 +7,20 @@
     
     <app-searchbar></app-searchbar>
 
-<div class="row">.
+<div class="row">
 <div class="col-2"></div>
-<div class="col-sm-8 mb-3">
-<a routerLink="newpoem">
-<button class="btn btn-secondary" type="button" style="background-color: rgba(0,135,255,0.7);">
-  <i class="fa-sharp fa-solid fa-plus"></i>
-</button>
-</a>
+<div *ngIf="!isToken"class="col-sm-8 mb-3">
 <button type="button" (click)="getPoems({'order_by': 'date[desc]'})" class="btn btn-secondary" style="background-color: rgba(0,135,255,0.7);">Newer</button>
 <button type="button" (click)="getPoems({'order_by': 'date'})" class="btn btn-secondary" style="background-color: rgba(0,135,255,0.7);">Oldest</button>
 <button type="button" (click)="getPoems({'order_by': 'title'})" class="btn btn-secondary" style="background-color: rgba(0,135,255,0.7);">Title</button>
 <button type="button" (click)="getPoems({'order_by': 'avg_mark[desc]'})" class="btn btn-secondary" style="background-color: rgba(0,135,255,0.7);">Top</button>
+</div>
+<div *ngIf="isToken"class="col-sm-8 mb-3">
+    <a routerLink="/newpoem">
+    <button class="btn btn-secondary" type="button" style="background-color: rgba(0,135,255,0.7);">
+      <i class="fa-sharp fa-solid fa-plus"></i>
+    </button>
+    </a>
 </div>
 <div class="col-2"></div>
 </div>

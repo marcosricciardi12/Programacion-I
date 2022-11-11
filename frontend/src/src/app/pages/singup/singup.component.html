@@ -9,21 +9,17 @@
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Create an Account!</h4>
                         </div>
-                        <form class="user">
-                            <div class="mb-3"><input class="form-control form-control-user" type="text" placeholder="Username" required=""></div>
-                            <div class="mb-3"><input class="form-control form-control-user" type="email" id="email" placeholder="Email Address" required=""></div>
+                        <form [formGroup]="registerForm" class="user">
+                            <div class="mb-3"><input class="form-control form-control-user" type="text" placeholder="Username" required="" formControlName="user"></div>
+                            <div class="mb-3"><input class="form-control form-control-user" type="email" id="email" placeholder="Email Address" required="" formControlName="email"></div>
                             <div class="row mb-3">
-                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="password" placeholder="Password" required=""></div>
-                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="verifyPassword" placeholder="Repeat Password" required=""></div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" placeholder="First Name" required=""></div>
-                                <div class="col-sm-6"><input class="form-control form-control-user" type="text" placeholder="Last Name" required=""></div>
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="password" placeholder="Password" required="" formControlName="password"></div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="verifyPassword" placeholder="Repeat Password" required="" formControlName="password2"></div>
                             </div>
                             <div class="row mb-3">
                                 <p id="emailErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                                 <p id="passwordErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
-                            </div><button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit">Register Account</button>
+                            </div><button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit" (click)="submit()">Register Account</button>
                             <hr>
                         </form>
                         <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>

@@ -48,6 +48,17 @@ class User(db.Model):
         }
         return user_json
     
+    def to_json_short_mail(self):
+        user_json = {
+            'id': self.id,
+            'user': str(self.user),
+            'email': str(self.email),
+            'poem_count': len(self.poems),
+            'reviews_count': len(self.reviews),
+            
+        }
+        return user_json
+    
     def to_json_onlyname(self):
         user_json = {
             'user': str(self.user)

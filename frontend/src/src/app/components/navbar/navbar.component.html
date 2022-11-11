@@ -10,7 +10,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item dropdown">
+        <li *ngIf="isToken" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             User
           </a>
@@ -23,14 +23,11 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" routerLink="/abmusers">Only Admin</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
+            <li><a class="dropdown-item" (click)="cerrarSesion()">Log Out</a></li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!isToken" class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/login">Sign in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/singup">Sign up</a>
         </li>
       </ul>
     </div>

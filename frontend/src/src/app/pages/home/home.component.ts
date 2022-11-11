@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   arrayPoems:any;
   params:any = null;
+  token:any = null;
   constructor(
     private router: Router,
     private poemsService: PoemsService
@@ -21,6 +22,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getPoems(this.params)
   }
+
+  get isToken() {
+    return localStorage.getItem('token') || undefined;
+ }
 
   getPoems(params:any) {
     this.params = params

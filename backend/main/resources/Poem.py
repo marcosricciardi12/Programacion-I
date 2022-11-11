@@ -48,8 +48,9 @@ class Poems(Resource):
     @jwt_required(optional=True)
     def get(self):
         page = 1
-        per_page = 20
+        per_page = 5
         user_id = get_jwt_identity()
+        claims = get_jwt()
         poems = db.session.query(PoemModel)
         keys = [
             'page',
@@ -60,7 +61,8 @@ class Poems(Resource):
             'date[lte]',
             'mark[gte]',
             'mark[lte]',
-            'order_by'
+            'order_by',
+            'own_poems'
         ]
         filters = {}
         for key in keys:
@@ -101,7 +103,10 @@ class Poems(Resource):
                         if value == "title[desc]":
                             poems = poems.order_by(PoemModel.title.desc())
                 else:
-                    poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).order_by(func.count(ReviewModel.mark),PoemModel.post_date)
+                    if key == "own_poems":
+                        poems = poems.filter(PoemModel.user).filter(UserModel.id.like(str(user_id))) #funciona
+                    else:
+                        poems = poems.outerjoin(PoemModel.reviews).group_by(PoemModel.id).order_by(func.count(ReviewModel.mark),PoemModel.post_date)
 
         
         poems = poems.paginate(page, per_page, True, 20)

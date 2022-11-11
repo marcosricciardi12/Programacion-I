@@ -19,7 +19,7 @@ def login():
         #Devolver valores y token
         data = {
             'id': str(user.id),
-            'user': user. user,
+            'user': user.user,
             'email': user.email,
             'access_token': access_token
         }

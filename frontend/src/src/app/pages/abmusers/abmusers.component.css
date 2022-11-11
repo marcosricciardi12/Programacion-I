@@ -19,7 +19,8 @@ body {
 }
   .recuadro_users {
     height: 33rem;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
   }
   #delete {
     margin-left: 5px;

@@ -47,4 +47,11 @@ export class PoemsService {
     });
     return  this.httpClient.delete(this.url_i + "/" + id.toString(), {headers: headers});
   }
+
+  getPoem(id: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return  this.httpClient.get(this.url_i + "/" + id.toString(), {headers: headers});
+  }
 }

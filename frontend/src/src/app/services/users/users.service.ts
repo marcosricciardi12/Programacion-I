@@ -34,6 +34,15 @@ export class UsersService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     });
+    return  this.httpClient.get(this.url_i + "/" + id.toString(), {headers: headers});
+  }
+
+  getUser(id: any) {
+    let auth_token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    });
     return  this.httpClient.delete(this.url_i + "/" + id.toString(), {headers: headers});
   }
 

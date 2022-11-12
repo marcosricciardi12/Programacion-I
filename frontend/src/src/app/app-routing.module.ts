@@ -9,6 +9,7 @@ import { PoemsComponent } from './pages/poems/poems.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { SingupComponent } from './pages/singup/singup.component';
+import { AuthsessionGuard } from 'src/guards/authsession.guard';
 
 
 
@@ -16,13 +17,13 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard]},
   { path: 'review', component: ReviewComponent},
   { path: 'singup', component: SingupComponent},
-  { path: 'newpoem', component: NewpoemComponent},
-  { path: 'abmpoems', component: AbmpoemsComponent},
-  { path: 'abmusers', component: AbmusersComponent},
-  { path: 'poem', component: PoemsComponent},
+  { path: 'newpoem', component: NewpoemComponent, canActivate: [AuthsessionGuard]},
+  { path: 'abmpoems', component: AbmpoemsComponent, canActivate: [AuthsessionGuard]},
+  { path: 'abmusers', component: AbmusersComponent, canActivate: [AuthsessionGuard]},
+  { path: 'poem/:user/:id_poem', component: PoemsComponent},
 
 ];
 

@@ -1,4 +1,5 @@
 from .. import db
+from . import UserModel
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,8 +32,11 @@ class Review(db.Model):
         return review_json
     
     def to_json_reviewpoem(self):
+        user = db.session.query(UserModel).get_or_404(self.user_id)
+        user = user.to_json_onlyname()
         review_json = {
             'user_id': self.user_id,
+            'user_review': user['user'],
             'comment': str(self.comment),
             'mark': self.mark,
         }

@@ -1,4 +1,5 @@
 <body>
+    <div class = "center_scroll">
     <app-navbar></app-navbar>
     <div class="container" id="backcolor" style="border-radius: 20px;"><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container pb50">
@@ -7,29 +8,17 @@
             <article>
                 
                 <div class="text-center">
-                    <h3>Contigo</h3>
+                    <h3>{{title}}</h3>
                     
                     <p>
-                    ¿Mi tierra?
-                    Mi tierra eres tú.<br>
-
-                    ¿Mi gente?
-                    Mi gente eres tú.<br>
-
-                    El destierro y la muerte<br>
-                    para mi están adonde<br>
-                    no estés tú.<br>
-
-                    ¿Y mi vida?
-                    Dime, mi vida,<br>
-                    ¿qué es, si no eres tú?<br>
+                    {{content}}
                     </p>
                    <ul class="post-meta list-inline">
                         <li class="list-inline-item">
-                            <i class="fa fa-user-circle-o"></i> <a href="#">Nickname</a>
+                            <i class="fa fa-user-circle-o"></i> <a href="#">{{poem_user}}</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-calendar-o"></i> <a href="#">29 June 2017</a>
+                            <i class="fa fa-calendar-o"></i> <a href="#">{{post_date}}</a>
                         </li>
                     </ul>
 
@@ -38,48 +27,42 @@
                     <hr class="mb40">
                     <h4 class="text-right">Comments</h4>
                     <div class="media mb40">
-                        <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
-                        <div class="media-body">
-                            <h5 class="mt-0 font400 clearfix">
-                                        <a href="#" class="float-right">Reply</a>
-                                        Jane Doe</h5> Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    
-                    <div class="media mb40">
-                        <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
-                        <div class="media-body">
-                            <h5 class="mt-0 font400 clearfix">
-                                        <a href="#" class="float-right">Reply</a>
-                                        Jane Doe</h5> Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-                    <div class="media mb40">
-                        <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
-                        <div class="media-body">
-                            <h5 class="mt-0 font400 clearfix">
-                                        <a href="#" class="float-right">Reply</a>
-                                        Jane Doe</h5> Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    <div class = "recuadro_poems">
+                        <div *ngFor=" let review of arrayReview">
+                            <div class="media mb40">
+                                <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
+                                <div class="media-body">
+                                    <h5 class="mt-0 font400 clearfix">
+                                                <a class="float-right">@{{review.user_review}}</a>
+                                    </h5> 
+                                    {{review.comment}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <hr class="mb40">
-                    <h4 class="mb40 text-uppercase font500">Post a comment</h4>
-                    <form role="form">
+                    <div *ngIf = "poem_user!=User">
+                        <h4 class="mb40 text-uppercase font500">Post a comment</h4>
+                    <form [formGroup]="reviewForm" role="form">
                         <div class="form-group">
-                            <label>Resume</label>
-                            <input type="text" class="form-control" placeholder="Title">
+                            <label>Mark</label>
+                            <input type="text" class="form-control" placeholder="Mark" formControlName="mark">
                         </div>
                         <div class="form-group">
                             <label>Comment</label>
-                            <textarea class="form-control" rows="5" placeholder="Comment"></textarea>
+                            <input class="form-control" rows="5" placeholder="Comment" formControlName="comment">
                         </div>
                         <div class="clearfix float-right">
-                            <button type="button" class="btn btn-primary btn-lg">Submit</button>
+                            <button type="button" class="btn btn-primary btn-lg" (click)="submit(poem_id)">Submit</button>
                         </div>
                     </form>
+                    </div>
+                    
                 </div>
             </article>
           </div>
     </div>
 </div>
     </div>
+</div>
 </body>

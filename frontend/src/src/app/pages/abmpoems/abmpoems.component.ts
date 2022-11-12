@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 ]
 })
 export class AbmpoemsComponent implements OnInit {
+  user:any = "";
   params:any = {own_poems: true};
   arrayPoems:any;
   constructor(
@@ -20,6 +21,11 @@ export class AbmpoemsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let token = localStorage.getItem("token") || "";
+    if (token) {
+      let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
+      this.user = decodedJWT.user
+    }
     this.getPoems(this.params)
   }
 

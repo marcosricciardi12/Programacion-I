@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { PoemsService } from 'src/app/services/poems/poems.service';
 
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,14 +12,21 @@ export class HomeComponent implements OnInit {
 
   arrayPoems:any;
   params:any = null;
-  token:any = null;
   constructor(
     private router: Router,
-    private poemsService: PoemsService
+    private poemsService: PoemsService,
   ) { }
 
   ngOnInit(): void {
+    let token = localStorage.getItem("token") || "";
+    if(token) {
+      if (this.tokenExpired(token)) {
+        localStorage.removeItem('token');
+      }
+    }
     this.getPoems(this.params)
+    
+
   }
 
   get isToken() {
@@ -41,6 +47,11 @@ export class HomeComponent implements OnInit {
       console.log('JSON data: ', data);
       this.arrayPoems = data.poems;
     });
+  }
+
+  tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 
 }

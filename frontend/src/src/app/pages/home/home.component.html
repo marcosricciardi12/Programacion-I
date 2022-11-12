@@ -4,7 +4,6 @@
     <div class="fijar_navbar">
         <app-navbar></app-navbar>
     </div>
-    
     <app-searchbar></app-searchbar>
 
 <div class="row">
@@ -37,9 +36,11 @@
             <p class="card-text">Poet: {{poem.user.user}}</p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                <button class="btn btn-default btn-xs">
-                    <img src="assets/img/eye.png" width="60" /><p>Read</p>
-            </button>
+                <a [routerLink]="['/poem', poem.user.user, poem.id]">
+                    <button class="btn btn-default btn-xs">
+                        <img src="assets/img/eye.png" width="60" /><p>Read</p>
+                </button>
+                </a>
                 </div>
                 <small class="text-muted">{{poem.post_date}}</small>
                 <small class="text-muted">

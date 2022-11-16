@@ -27,12 +27,23 @@ class Poem(db.Model):
         return poem_json
 
     def to_json_short(self):
+        reviews = [review.to_json_reviewpoem() for review in self.reviews]
+        suma = 0
+        for review in reviews:
+            suma = suma + int(review['mark'])
+        if(len(reviews) == 0):
+            average = 0
+        else:
+                average = suma/len(reviews)
+        print(average)
         poem_json = {
             'id': self.id,
             'title': str(self.title),
             'user': self.user.to_json_onlyname(),
             'post_date': self.post_date.strftime("%Y-%m-%d  %H:%M:%S"),
-            'reviews': len(self.reviews)
+            'reviews': len(self.reviews),
+            'average': round(average,2),
+            'int_average': int(round(average))  
         }
         return poem_json
 

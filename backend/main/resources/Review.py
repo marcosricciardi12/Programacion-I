@@ -42,6 +42,7 @@ class Reviews(Resource):
     @jwt_required()
     def post(self):
         review_user_id = get_jwt_identity()
+        print("id de usuario que quiere hacer la reseña: " + str(review_user_id))
         reviews = db.session.query(ReviewModel).all()
         has_review_from_this_user = False
         
@@ -49,9 +50,11 @@ class Reviews(Resource):
         #Necesito los id de los usuarios que ya calificaron al poema
         #El dueño del token va a ser el creador del poema
         review = ReviewModel.from_json(request.get_json())
+        print("id del poema que quiere reseñar: " + str(review.poem_id))
         review.user_id = review_user_id
         for rew in reviews:
-            if rew.user_id == review_user_id and rew.poem_id == review.poem_id:
+            if int(rew.user_id) == int(review_user_id) and int(rew.poem_id) == int(review.poem_id):
+                print("Este usuario ya hizo una reseña de este poema")
                 has_review_from_this_user = True
                 break
         poem = db.session.query(PoemModel).get_or_404(review.poem_id)

@@ -35,6 +35,7 @@ class Review(db.Model):
         user = db.session.query(UserModel).get_or_404(self.user_id)
         user = user.to_json_onlyname()
         review_json = {
+            'review_id': self.id,
             'user_id': self.user_id,
             'user_review': user['user'],
             'comment': str(self.comment),

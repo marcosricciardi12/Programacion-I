@@ -45,11 +45,9 @@
                 <small class="text-muted">{{poem.post_date}}</small>
                 <small class="text-muted">
                     <div class="rating">
-                        <i class="fa-solid fa-star" style="color: rgb(214, 136, 18)"></i>
-                        <i class="fa-solid fa-star" style="color: rgb(214, 136, 18)"></i>
-                        <i class="fa-solid fa-star" style="color: rgb(214, 136, 18)"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
+                        <i *ngFor="let i of [].constructor(poem.int_average)" class="fa-solid fa-star" style="color: rgb(214, 136, 18)"></i>
+                        <i *ngFor="let i of [].constructor(5-poem.int_average)" class="fa-regular fa-star"></i>
+                        <span > ({{poem.average}})</span>
                     </div>
                 </small>
             </div>

@@ -17,6 +17,7 @@ body {
 .recuadro_poems {
 	height: 33rem;
 	overflow-y: scroll;
+  overflow-x: hidden;
 }
 
   .navbar {
@@ -28,3 +29,36 @@ body {
     margin-top: 20px;
   }
   
+  #delete {
+    border-color: gray;
+    margin-left: 5px;
+    background-color: var(--bs-gray);
+  }
+  #delete:hover {
+    margin-left: 5px;
+    border-color: black;
+    background-color: var(--bs-red);
+  }
+
+  #star{
+    color: rgba(0, 0, 0, 0.5 );
+  }
+  #star:hover ,
+  #star:hover ~ #star {
+    color: rgb(214, 136, 18);
+  }
+
+  .clasificacion{
+    text-align: left;
+    direction: rtl;/* right to left */
+    unicode-bidi: bidi-override;/* bidi de bidireccional */
+}
+
+
+  input[type = "radio"] {
+   display:none;
+  }
+
+  input[type = "radio"]:checked ~ #star{
+    color: rgb(214, 136, 18);
+  } 

@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-md mb40">
             <article>
-                
                 <div class="text-center">
+                    
                     <h3>{{title}}</h3>
                     
                     <p>
@@ -24,39 +24,80 @@
 
                     
                     </div>
+                    
                     <hr class="mb40">
+                    
                     <h4 class="text-right">Comments</h4>
                     <div class="media mb40">
                     <div class = "recuadro_poems">
                         <div *ngFor=" let review of arrayReview">
-                            <div class="media mb40">
-                                <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>
-                                <div class="media-body">
-                                    <h5 class="mt-0 font400 clearfix">
-                                                <a class="float-right">@{{review.user_review}}</a>
-                                    </h5> 
-                                    {{review.comment}}
+                            <div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="media mb40">
+                                            <i class="d-flex mr-3 fa fa-user-circle-o fa-4x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" >
+                                        <h5 class="mt-0 font400">
+                                            <a>@{{review.user_review}}</a>
+                                         </h5>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div style="padding-left: 1%; padding-right: 1%;">
+                                    <div class="card border-dark mb-3" style="max-width: 100%;">
+                                        <div class="card-header d-flex justify-content-between align-items-center">{{review.mark}}
+                                            <button *ngIf="isToken && isAdmin || User==review.user_review" class="btn btn-primary btn-sm float-right" id="delete" type="button" (click)="deleteReview(review.review_id)">
+                                                <i class="fas fa-trash-alt"></i>
+                                                delete
+                                            </button>
+                                        </div>
+                                        <div class="card-body text-dark">
+                                          <p class="card-text">{{review.comment}}</p>
+                                        </div>
+                                      </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        
                     </div>
                     <hr class="mb40">
-                    <div *ngIf = "poem_user!=User">
-                        <h4 class="mb40 text-uppercase font500">Post a comment</h4>
-                    <form [formGroup]="reviewForm" role="form">
-                        <div class="form-group">
-                            <label>Mark</label>
-                            <input type="text" class="form-control" placeholder="Mark" formControlName="mark">
+                        <div *ngIf = "poem_user!=User && User!=null && !publishing">
+                            <h4 class="mb40 text-uppercase font500">Post a comment</h4>
+                        <form [formGroup]="reviewForm" role="form">
+                            <div class="form-group">
+                                <label>Mark</label>
+                                <div class="rating" style="position: relative">
+                                    <p class="clasificacion">
+                                        <input id="radio5" type="radio" name="estrellas" value="5" formControlName="mark" name="mark">
+                                        <label for="radio5" id="star"><i class="fa-solid fa-star"></i></label>
+                                        <input id="radio4" type="radio" name="estrellas" value="4" formControlName="mark" name="mark">
+                                        <label for="radio4" id="star"><i class="fa-solid fa-star"></i></label>
+                                        <input id="radio3" type="radio" name="estrellas" value="3" formControlName="mark" name="mark">
+                                        <label for="radio3" id = "star"><i class="fa-solid fa-star"></i></label>
+                                        <input id="radio2" type="radio" name="estrellas" value="2" formControlName="mark" name="mark">
+                                        <label for="radio2" id="star"><i class="fa-solid fa-star"></i></label>
+                                        <input id="radio1" type="radio" name="estrellas" checked="checked" value="1" formControlName="mark" name="mark">
+                                        <label for="radio1" id="star"><i class="fa-solid fa-star"></i></label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Comment</label>
+                                <input class="form-control" rows="5" placeholder="Comment" formControlName="comment">
+                            </div>
+                            <div class="clearfix float-right" style="margin: 0.5rem;">
+                                <button type="button" class="btn btn-primary btn-lg" (click)="submit(poem_id)">Submit</button>
+                            </div>
+                        </form>
                         </div>
-                        <div class="form-group">
-                            <label>Comment</label>
-                            <input class="form-control" rows="5" placeholder="Comment" formControlName="comment">
+                        <div *ngIf= "publishing" style="padding-left: 50%; padding-right: 50%; padding-top: 4rem; padding-bottom: 4rem;">
+                            <app-loading></app-loading>
                         </div>
-                        <div class="clearfix float-right">
-                            <button type="button" class="btn btn-primary btn-lg" (click)="submit(poem_id)">Submit</button>
-                        </div>
-                    </form>
-                    </div>
+    
                     
                 </div>
             </article>

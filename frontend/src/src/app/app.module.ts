@@ -21,6 +21,7 @@ import { PagesComponent } from './components/pages/pages.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PoemsComponent } from './pages/poems/poems.component';
+import { LoadingComponent } from './components/loading/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PoemsComponent } from './pages/poems/poems.component';
     AbmpoemsComponent,
     AbmusersComponent,
     UserComponent,
-    PoemsComponent
+    PoemsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ function delay(ms: number) {
   styleUrls: ['./poems.component.css']
 })
 export class PoemsComponent implements OnInit {
+  publishing:any = false;
   poem_id:any;
   reviewForm!: FormGroup;
   title:any;
@@ -60,12 +61,29 @@ export class PoemsComponent implements OnInit {
   }
   get User() {
     let token = localStorage.getItem("token") || "";
-    let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
-  
-    return decodedJWT.user
+    if (token) {
+      let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
+      return decodedJWT.user
+    }
+    else {
+      return null
+    }
+    
   }
   
+  get isToken() {
+    return localStorage.getItem('token') || undefined;
+ }
+
+ get isAdmin() {
+  let token = localStorage.getItem("token") || "";
+  let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
+
+  return decodedJWT.admin
+}
+
   make_review(dataReview:any) {
+    this.publishing = true;
     this.reviewService.make_review(dataReview).subscribe({
       next: async (rta) => {
         Swal.fire({
@@ -76,16 +94,33 @@ export class PoemsComponent implements OnInit {
           timer: 3000
         });
         await delay(3001);
+        this.publishing = false;
         window.location.reload();
       }, error: async (error) =>{
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'No se pudo publicar tu review',
-          showConfirmButton: false,
-          timer: 3500
-        });
-        await delay(3500);
+        if (error.status == 403)
+        {
+          Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Ya has hecho una reseña a este poema!', 
+            showConfirmButton: false,
+            timer: 3500
+          });
+          await delay(3500);
+          this.publishing = false;
+          console.log('error: ', error);
+        }
+        else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'No se pudo publicar tu review', 
+            showConfirmButton: false,
+            timer: 3500
+          });
+          await delay(3500);
+          this.publishing = false;
+        }
         console.log('error: ', error);
       }, complete: () => {
         console.log('Termino');
@@ -104,6 +139,46 @@ export class PoemsComponent implements OnInit {
       else{
         alert("Formulario invalido")
       }
+    }
+
+    deleteReview(id: number) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.reviewService.deleteReview(id).subscribe();
+          window.location.reload();
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'This review is safe :)',
+            'error'
+          )
+        }
+      })
+      
     }
 
   }

@@ -4,7 +4,7 @@
     <div class="fijar_navbar">
         <app-navbar></app-navbar>
     </div>
-    <app-searchbar></app-searchbar>
+    <app-searchbar (messageEvent)="receiveMessage($event)"></app-searchbar>
 
 <div class="row">
 <div class="col-2"></div>

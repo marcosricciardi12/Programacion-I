@@ -59,9 +59,7 @@ export class NewpoemComponent implements OnInit {
 
 
   submit() {
-    console.log(this.poemForm.value);
     if (this.poemForm.valid) {
-        console.log(this.poemForm.value);
         let title = this.poemForm.value.title;
         let content = this.poemForm.value.content;
         this.register({title, content});

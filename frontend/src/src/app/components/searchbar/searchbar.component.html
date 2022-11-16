@@ -3,9 +3,9 @@
 <div class="row">
   <div class="col-lg-6 col-md-8 mx-auto">
       <div class="container-fluid">
-          <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Buscar por titulo" aria-label="Buscar poema">
-              <button class="btn btn-secondary me-2" type="button" style="background-color: rgba(0,135,255,0.7);" >
+          <form [formGroup]="searchForm" class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar poema" formControlName="value">
+              <button class="btn btn-secondary me-2" type="button" style="background-color: rgba(0,135,255,0.7);" (click)="submit()">
                 <i class="fa-sharp fa-solid fa-search"></i>
             </button>
           </form>

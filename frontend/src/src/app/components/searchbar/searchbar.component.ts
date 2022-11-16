@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-searchbar',
@@ -6,10 +8,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent implements OnInit {
+  searchForm!: FormGroup;
+  message: string = ""
+  @Output() messageEvent = new EventEmitter<string>();
+  constructor(private formBuilder: FormBuilder) { }
 
-  constructor() { }
+
+  sendMessage(value:any) {
+    this.messageEvent.emit(value)
+  }
 
   ngOnInit(): void {
+    this.searchForm = this.formBuilder.group({
+      value: ['', Validators.required],
+   });
   }
+
+  submit() {
+    if (this.searchForm.valid) {
+        let value = this.searchForm.value.value;
+        this.sendMessage({value});
+      }
+      else{
+        let value = null
+        this.sendMessage({value});
+      }
+    }  
 
 }

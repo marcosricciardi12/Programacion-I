@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 ]
 })
 export class AbmusersComponent implements OnInit {
+  message:any = {};
+  params:any = {};
   arrayUsuarios:any;
   constructor(
     private router: Router,
@@ -20,18 +22,17 @@ export class AbmusersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getUsers(this.params);
   }
 
-  getUsers(){
-    this.userService.getUsers().subscribe((data:any) =>{
+  getUsers(params: any){
+    this.userService.getUsers(params).subscribe((data:any) =>{
       console.log('JSON data: ', data);
       this.arrayUsuarios = data.users;
     })
   }
 
   deleteUser(id: number) {
-    console.log("HOLANDA")
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -68,6 +69,21 @@ export class AbmusersComponent implements OnInit {
         )
       }
     })
+    
+  }
+
+  receiveMessage($event: any) {
+    this.message = $event
+    if (this.message.value){
+      this.params.user = this.message.value
+    // this.params.user_writer = this.message.value
+    this.getUsers(this.params)
+    }
+    else {
+      delete this.params.user
+    // this.params.user_writer = this.message.value
+    this.getUsers(this.params)
+    }
     
   }
 

@@ -11,14 +11,14 @@ export class UsersService {
   url_i = 'user'
   constructor(private httpClient: HttpClient) { }
     
-  getUsers() {
+  getUsers(params: any) {
     let auth_token = localStorage.getItem('token');
     if (auth_token) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${auth_token}`
       });
-      return this.httpClient.get(this.url, {headers: headers});
+      return this.httpClient.get(this.url, {params: params, headers: headers});
     }
     else {
       const headers = new HttpHeaders({

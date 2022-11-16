@@ -9,9 +9,9 @@ import { PoemsService } from 'src/app/services/poems/poems.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  message:any = {};
   arrayPoems:any;
-  params:any = null;
+  params:any = {};
   constructor(
     private router: Router,
     private poemsService: PoemsService,
@@ -52,6 +52,22 @@ export class HomeComponent implements OnInit {
   tokenExpired(token: string) {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+
+
+  receiveMessage($event: any) {
+    this.message = $event
+    if (this.message.value){
+      this.params.title = this.message.value
+    // this.params.user_writer = this.message.value
+    this.getPoems(this.params)
+    }
+    else {
+      delete this.params.title
+    // this.params.user_writer = this.message.value
+    this.getPoems(this.params)
+    }
+    
   }
 
 }

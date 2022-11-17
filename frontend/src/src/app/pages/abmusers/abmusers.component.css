@@ -30,3 +30,13 @@ body {
   #heading {
     padding-top: 10px;
   }
+
+  #newuser {
+    background-color: rgba(0,135,255,0.7);
+    border-color: black;
+  }
+
+  #newuser:hover {
+    border-color: black;
+    background-color: var(--bs-green);
+  }

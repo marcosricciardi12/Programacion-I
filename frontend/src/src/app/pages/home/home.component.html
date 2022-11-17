@@ -4,7 +4,7 @@
     <div class="fijar_navbar">
         <app-navbar></app-navbar>
     </div>
-    <app-searchbar (messageEvent)="receiveMessage($event)"></app-searchbar>
+    <app-searchbar (messageEvent)="receiveMessageSearch($event)"></app-searchbar>
 
 <div class="row">
 <div class="col-2"></div>
@@ -25,7 +25,7 @@
 </div>
 <div class="row">
 <div class="recuadro_poems">
-<div *ngFor=" let poem of arrayPoems" >
+<div *ngFor=" let poem of arrayPoems">
     <div class="row">
     <div class="col-2"></div>
     <div class="col-sm-8 mb-3">
@@ -59,7 +59,7 @@
 </div>
 </div>
 <div class="mt-3">
-    <app-pages></app-pages>
+    <app-pages (messageEvent)="receiveMessagePage($event)" [childMessage]="paginacion"></app-pages>
 </div>
 
 

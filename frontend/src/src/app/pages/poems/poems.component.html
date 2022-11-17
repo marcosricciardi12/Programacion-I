@@ -48,7 +48,11 @@
                                 
                                 <div style="padding-left: 1%; padding-right: 1%;">
                                     <div class="card border-dark mb-3" style="max-width: 100%;">
-                                        <div class="card-header d-flex justify-content-between align-items-center">{{review.mark}}
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <div class="rating">
+                                                <i *ngFor="let i of [].constructor(review.mark)" class="fa-solid fa-star" style="color: rgb(214, 136, 18)"></i>
+                                                <i *ngFor="let i of [].constructor(5-review.mark)" class="fa-regular fa-star"></i>
+                                            </div>
                                             <button *ngIf="isToken && isAdmin || User==review.user_review" class="btn btn-primary btn-sm float-right" id="delete" type="button" (click)="deleteReview(review.review_id)">
                                                 <i class="fas fa-trash-alt"></i>
                                                 delete

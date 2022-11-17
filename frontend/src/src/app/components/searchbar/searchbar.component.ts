@@ -27,7 +27,8 @@ export class SearchbarComponent implements OnInit {
   submit() {
     if (this.searchForm.valid) {
         let value = this.searchForm.value.value;
-        this.sendMessage({value});
+        let page = 1 ;
+        this.sendMessage({value, page});
       }
       else{
         let value = null

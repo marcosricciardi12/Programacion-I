@@ -13,9 +13,11 @@ import Swal from 'sweetalert2';
 ]
 })
 export class AbmusersComponent implements OnInit {
+  messsagePage:any = {};
   message:any = {};
   params:any = {};
   arrayUsuarios:any;
+  paginacion:any = {};
   constructor(
     private router: Router,
     private userService: UsersService,
@@ -29,6 +31,9 @@ export class AbmusersComponent implements OnInit {
     this.userService.getUsers(params).subscribe((data:any) =>{
       console.log('JSON data: ', data);
       this.arrayUsuarios = data.users;
+      this.paginacion.page = data.page;
+      this.paginacion.pages = data.pages;
+      console.log('Paginacion actual: ', this.paginacion);
     })
   }
 
@@ -72,16 +77,32 @@ export class AbmusersComponent implements OnInit {
     
   }
 
-  receiveMessage($event: any) {
+  receiveMessageSearch($event: any) {
     this.message = $event
     if (this.message.value){
       this.params.user = this.message.value
+      delete this.params.page
     // this.params.user_writer = this.message.value
     this.getUsers(this.params)
     }
     else {
       delete this.params.user
     // this.params.user_writer = this.message.value
+    this.getUsers(this.params)
+    }
+    
+  }
+
+  receiveMessagePage($event: any) {
+    this.messsagePage = $event
+    if (this.messsagePage){
+      this.params.page = this.messsagePage
+    // this.params.user_writer = this.messsagePage.value
+    this.getUsers(this.params)
+    }
+    else {
+      delete this.params.page
+    // this.params.user_writer = this.messsagePage.value
     this.getUsers(this.params)
     }
     

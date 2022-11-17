@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PoemsComponent } from './pages/poems/poems.component';
 import { LoadingComponent } from './components/loading/loading/loading.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LoadingComponent } from './components/loading/loading/loading.component
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [PoemsService, UsersService, ReviewsService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}],

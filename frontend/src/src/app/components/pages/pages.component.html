@@ -1,13 +1,19 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
+      <li *ngIf="childMessage.page==1 || childMessage.pages==1"class="page-item disabled">
         <a class="page-link">Previous</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+      <li *ngIf="childMessage.page!=1"class="page-item">
+        <a class="page-link" (click)="sendMessagePage(childMessage.page-1)">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" (click)="sendMessagePage(0+childMessage.page)">{{0+childMessage.page}}</a></li>
+      <!-- <li class="page-item"><a class="page-link" (click)="sendMessagePage(1+childMessage.page)">2</a></li>
+      <li class="page-item"><a class="page-link" (click)="sendMessagePage(2+childMessage.page)">3</a></li> -->
+      <li *ngIf="childMessage.page==childMessage.pages || childMessage.pages==1|| childMessage.pages==0"class="page-item disabled">
+        <a class="page-link disabled">Next</a>
+      </li>
+      <li *ngIf="childMessage.page<childMessage.pages" class="page-item">
+        <a class="page-link" (click)="sendMessagePage(1+childMessage.page)">Next</a>
       </li>
     </ul>
 </nav>

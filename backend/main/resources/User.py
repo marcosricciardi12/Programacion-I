@@ -64,7 +64,7 @@ class Users(Resource):
     @admin_required
     def get(self):
         page = 1
-        per_page = 20
+        per_page = 5
         users = db.session.query(UserModel)
         keys = [
             'page',

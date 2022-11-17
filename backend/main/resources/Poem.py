@@ -48,7 +48,7 @@ class Poems(Resource):
     @jwt_required(optional=True)
     def get(self):
         page = 1
-        per_page = 5
+        per_page = 4
         user_id = get_jwt_identity()
         claims = get_jwt()
         poems = db.session.query(PoemModel)

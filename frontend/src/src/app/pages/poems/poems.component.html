@@ -15,10 +15,10 @@
                     </p>
                    <ul class="post-meta list-inline">
                         <li class="list-inline-item">
-                            <i class="fa fa-user-circle-o"></i> <a href="#">{{poem_user}}</a>
+                            <i class="fa fa-user-circle-o"></i> <a> {{poem_user}}</a>
                         </li>
                         <li class="list-inline-item">
-                            <i class="fa fa-calendar-o"></i> <a href="#">{{post_date}}</a>
+                            <i class="fa fa-calendar-o"></i> <a> {{post_date}}</a>
                         </li>
                     </ul>
 
@@ -30,6 +30,9 @@
                     <h4 class="text-right">Comments</h4>
                     <div class="media mb40">
                     <div class = "recuadro_poems">
+                        <div *ngIf="noReview">
+                            <span>No reviews yet!</span>
+                        </div>
                         <div *ngFor=" let review of arrayReview">
                             <div>
                                 <div class="row">

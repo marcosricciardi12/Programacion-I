@@ -1,5 +1,5 @@
 body {
-    background: url("../../../assets/img/pexels-cottonbro-6037577.jpg");
+    background: url("https://rare-gallery.com/uploads/posts/1183436-drawing-birds-monochrome-artwork-raven-crow-bird-of-prey-eagle-bird-wing-sketch-black-and-white-monochrome-photography-perching-bird.jpg");
     background-size:cover; 
     background-position: center;
     background-repeat: no-repeat;
@@ -45,6 +45,7 @@ body {
   
   #poemsocket-row {
     background-color: rgba(13,104,240,0.5);
+    border-radius: 15px;
   }
   
   #button-edit {

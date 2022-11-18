@@ -12,9 +12,11 @@ import Swal from 'sweetalert2';
 ]
 })
 export class AbmpoemsComponent implements OnInit {
+  messsagePage:any = {};
   user:any = "";
   params:any = {own_poems: true};
   arrayPoems:any;
+  paginacion:any = {};
   constructor(
     private router: Router,
     private poemsService: PoemsService
@@ -35,6 +37,8 @@ export class AbmpoemsComponent implements OnInit {
     this.poemsService.getPoems(params).subscribe((data:any) =>{
       console.log('JSON data: ', data);
       this.arrayPoems = data.poems;
+      this.paginacion.page = data.page;
+      this.paginacion.pages = data.pages;
     });
   }
 
@@ -76,6 +80,21 @@ export class AbmpoemsComponent implements OnInit {
         )
       }
     })
+    
+  }
+
+  receiveMessagePage($event: any) {
+    this.messsagePage = $event
+    if (this.messsagePage){
+      this.params.page = this.messsagePage
+    // this.params.user_writer = this.messsagePage.value
+    this.getPoems(this.params)
+    }
+    else {
+      delete this.params.page
+    // this.params.user_writer = this.messsagePage.value
+    this.getPoems(this.params)
+    }
     
   }
 

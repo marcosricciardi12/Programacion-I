@@ -19,7 +19,9 @@
                             <div class="row mb-3">
                                 <p id="emailErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                                 <p id="passwordErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
-                            </div><button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit" (click)="submit()">Register Account</button>
+                            </div>
+							<div class="mb-3"><input type="checkbox" value="true" formControlName="admin" name="admin"> Admin access</div>
+							<button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit" (click)="submit()">Register Account</button>
                             <hr>
                         </form>
                         <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>

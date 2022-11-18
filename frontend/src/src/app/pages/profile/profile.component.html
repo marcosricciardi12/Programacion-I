@@ -11,69 +11,47 @@
       <div class="col-md-3">
         <div class="text-center">
           <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">
-          <h6 style="color: rgb(255, 255, 255);">Upload a different photo...</h6>
-          
-          <input type="file" class="form-control">
         </div>
       </div>
       
       <!-- edit form column -->
         <!-- Esto es eliminable -->
       <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
-          <i class="fa fa-coffee"></i>
-          This is an <strong>.alert</strong>. Use this to show important messages to the user.
-        </div>
         <h3 style="color: rgb(255, 255, 255);">Personal info</h3>
           <!-- fin de lo eliminable -->
         
         <form class="form-horizontal" role="form">
           <div class="form-group">
-            <label class="col-lg-3 control-label"  style="color: rgb(255, 255, 255);">First name:</label>
+            <label class="col-lg-3 control-label"  style="color: rgb(255, 255, 255);">User</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="dey-dey">
+              <input class="form-control" type="text" value="{{user}}">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">Last name:</label>
+            <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">E-mail:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="bootdey">
+              <input class="form-control" type="text" value="{{email}}">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">Password:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="">
+              <input class="form-control" type="password" value="">
             </div>
               </div>
           <div class="form-group">
             <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">Repeat Password:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="">
+              <input class="form-control" type="password" value="">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="janesemail@gmail.com">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">Time Zone:</label>
-            <div class="col-lg-8">
-              <div class="ui-select">
-                <select id="user_time_zone" class="form-control">
-                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                  <option value="Alaska">(GMT-09:00) Alaska</option>
-                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                  <option value="Arizona">(GMT-07:00) Arizona</option>
-                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                </select>
-              </div>
+              <label class="col-lg-3 control-label" style="color: rgb(255, 255, 255);">Admin access:  </label>
+              <br>
+              <input *ngIf="isAdmin" class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" checked/>
+              <input *ngIf="!isAdmin" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" />
+              <label class="form-check-label" for="flexCheckChecked"></label>
             </div>
           </div>
         </form>
@@ -84,9 +62,8 @@
 
         <div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4 col-lg-1"><button class="btn btn-primary" id="submit" type="button">Submit</button></div>
-                <div class="col-md-4"><button class="btn btn-primary" id="cancel" type="button">Cancel</button>
+                <div class="col-md-3"></div>
+                <div class="col-md-4 col-lg-1"><button class="btn btn-primary" id="submit" type="button">Submit</button>
                     <div id="final"></div>
                 </div>
             </div>

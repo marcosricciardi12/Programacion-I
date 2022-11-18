@@ -82,6 +82,16 @@ export class PoemsComponent implements OnInit {
   return decodedJWT.admin
 }
 
+get noReview() {
+  if (this.arrayReview.length == 0){
+    return true
+  }
+  else
+  {
+    return false
+  }
+}
+
   make_review(dataReview:any) {
     this.publishing = true;
     this.reviewService.make_review(dataReview).subscribe({

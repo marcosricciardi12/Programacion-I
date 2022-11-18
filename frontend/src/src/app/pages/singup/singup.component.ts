@@ -24,7 +24,8 @@ export class SingupComponent implements OnInit {
       user: ['', Validators.required],
       password: ['', Validators.required],
       password2: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required],
+      admin: [false],
    });
   }
   register(dataLogin:any) {
@@ -68,10 +69,10 @@ export class SingupComponent implements OnInit {
         let password = this.registerForm.value.password;
         let password2 = this.registerForm.value.password2;
         let email = this.registerForm.value.email;
-
+        let admin = this.registerForm.value.admin;
         // console.log('Credenciales: ', {email, password});
         if (password == password2){
-          this.register({user, password, email});
+          this.register({user, password, email, admin});
         }
         else {
           Swal.fire({

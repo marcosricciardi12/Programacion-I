@@ -35,7 +35,6 @@ class Poem(db.Model):
             average = 0
         else:
                 average = suma/len(reviews)
-        print(average)
         poem_json = {
             'id': self.id,
             'title': str(self.title),

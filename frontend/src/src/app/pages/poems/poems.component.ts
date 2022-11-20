@@ -53,10 +53,10 @@ export class PoemsComponent implements OnInit {
       console.log('JSON data: ', data);
       this.arrayReview = data.reviews;
       this.title = data.title;
-      this.content = data.content;
-      this.post_date = data.post_date
-      this.poem_user = this.poem.user
-      this.poem_id = this.poem.id_poem
+      this.content = this.prepararPoema(data.content);
+      this.post_date = data.post_date;
+      this.poem_user = this.poem.user;
+      this.poem_id = this.poem.id_poem;
     });
   }
   get User() {
@@ -92,6 +92,10 @@ get noReview() {
   }
 }
 
+  prepararPoema(poema:any) {
+    poema = poema.split("\n").join("<br />");
+    return poema;
+}
   make_review(dataReview:any) {
     this.publishing = true;
     this.reviewService.make_review(dataReview).subscribe({

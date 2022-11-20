@@ -54,4 +54,14 @@ export class PoemsService {
     });
     return  this.httpClient.get(this.url_i + "/" + id.toString(), {headers: headers});
   }
+
+  putPoem(params:any, id: any) {
+    let auth_token = localStorage.getItem('token');
+    console.log('put params: ', params)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    });
+    return  this.httpClient.put(this.url_i + "/" + id.toString(), params, {headers: headers});
+  }
 }

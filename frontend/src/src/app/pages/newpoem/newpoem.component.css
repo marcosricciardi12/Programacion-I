@@ -1,5 +1,8 @@
 body {
-    background-image: url('https://cdn.euroinnova.edu.es/img/subidasEditor/dise%C3%B1o%20sin%20t%C3%ADtulo%20(65)-1634640085.webp');
+    background: url("../../../assets/img/mountains.jpg");
     background-size:cover; 
     background-position: center;
-}
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }

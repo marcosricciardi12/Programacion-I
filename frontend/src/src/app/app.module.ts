@@ -14,7 +14,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NewpoemComponent } from './pages/newpoem/newpoem.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ReviewComponent } from './pages/review/review.component';
 import { SingupComponent } from './pages/singup/singup.component';
 import { UserComponent } from './components/user/user.component';
 import { PagesComponent } from './components/pages/pages.component';
@@ -23,6 +22,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PoemsComponent } from './pages/poems/poems.component';
 import { LoadingComponent } from './components/loading/loading/loading.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EditpoemComponent } from './components/editpoem/editpoem/editpoem.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +33,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SearchbarComponent,
     PagesComponent,
     ProfileComponent,
-    ReviewComponent,
     SingupComponent,
     NewpoemComponent,
     AbmpoemsComponent,
     AbmusersComponent,
     UserComponent,
     PoemsComponent,
-    LoadingComponent
+    LoadingComponent,
+    EditpoemComponent
   ],
   imports: [
     BrowserModule,

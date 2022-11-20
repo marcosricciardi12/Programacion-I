@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoemsService } from 'src/app/services/poems/poems.service';
 import Swal from 'sweetalert2';
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 @Component({
   selector: 'app-abmpoems',
@@ -12,17 +17,26 @@ import Swal from 'sweetalert2';
 ]
 })
 export class AbmpoemsComponent implements OnInit {
+  editForm!: FormGroup;
   messsagePage:any = {};
   user:any = "";
   params:any = {own_poems: true};
   arrayPoems:any;
   paginacion:any = {};
+  title:any = "";
+  content:any = "";
+  poem_id:any ;
   constructor(
     private router: Router,
-    private poemsService: PoemsService
+    private poemsService: PoemsService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.editForm = this.formBuilder.group({
+      title: [this.title, Validators.required],
+      content: [this.content, Validators.required]
+   });
     let token = localStorage.getItem("token") || "";
     if (token) {
       let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
@@ -43,7 +57,6 @@ export class AbmpoemsComponent implements OnInit {
   }
 
   deletePoem(id: number) {
-    console.log("HOLANDA")
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -97,5 +110,66 @@ export class AbmpoemsComponent implements OnInit {
     }
     
   }
+
+  getPoem(id: number) {
+    console.log('valores form', this.editForm.value)
+    this.poemsService.getPoem(id).subscribe((data:any) =>{
+      console.log('JSON data: ', data);
+      this.title = data.title;
+      this.content = data.content;
+      this.poem_id = id,
+      this.editForm.value.title = data.title;
+      this.editForm.value.content = data.content;
+      console.log('valores form', this.editForm.value)
+    });
+    
+  }
+
+  editPoem(params:any, id: number) {
+    this.poemsService.putPoem(params, id).subscribe({
+      next: async (rta) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Tu poema ha sido editado',
+          text:'titulo nuevo: ' + rta,
+          showConfirmButton: false,
+          timer: 3000
+        });
+        await delay(3001);
+        window.location.reload();
+      }, error: async (error) =>{
+
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: ' No se pudo editar tu poema',
+          showConfirmButton: false,
+          timer: 3500
+        });
+        await delay(3500);
+        console.log('error: ', error);
+      }, complete: () => {
+        console.log('Termino');
+      }
+    })
+    
+  }
+
+  submitEdit(poem_id: any) {
+    console.log('valores form', this.editForm.value)
+    this.editForm.value.title = this.title
+    this.editForm.value.title = this.content
+    if (this.editForm.valid) {
+        let title = this.editForm.value.title;
+        let content = this.editForm.value.content;
+
+        this.editPoem({title, content}, poem_id);
+      }
+      else{
+        alert("Formulario invalido")
+      }
+    }
+
 
 }

@@ -11,7 +11,8 @@ function delay(ms: number) {
 @Component({
   selector: 'app-newpoem',
   templateUrl: './newpoem.component.html',
-  styleUrls: ['../../../assets/css/style.css']
+  styleUrls: ['./newpoem.component.css',
+              '../../../assets/css/style.css']
 })
 export class NewpoemComponent implements OnInit {
   poemForm!: FormGroup;
@@ -42,10 +43,11 @@ export class NewpoemComponent implements OnInit {
         await delay(3001);
         this.router.navigate(['/home']);
       }, error: async (error) =>{
+        console.log('Error es: ',error.error.msg)
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: 'No se pudo publicar tu poema',
+          title: ' ' + error.error.msg + ' ',
           showConfirmButton: false,
           timer: 3500
         });

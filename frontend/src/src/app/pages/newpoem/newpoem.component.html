@@ -2,7 +2,7 @@
   <app-navbar></app-navbar>
 <section [formGroup]="poemForm" class="py-5 text-center container">
     <div class="row">
-        <div class="col-lg-3 col-md-8 mx-auto">
+        <div class="col-lg-6 col-md-8 mx-auto">
             <div class="container-fluid">
                 
                     <input type="title" class="form-control" id="title" placeholder="Title" formControlName="title">
@@ -11,9 +11,20 @@
         </div>
 
 </div>
-<div class="mb-5">
-  <input class="form-control me-2" id="writePoem" placeholder="Write Poem " style="height: 500px" formControlName="content">
+<div class="row">
+  <div class="col-lg-6 col-md- mx-auto">
+      <div class="container-fluid">
+          
+        <div class="mb-5 mt-3" style="width: 100%;">
+          <textarea class="form-control me-2" id="writePoem" placeholder="Write Poem " style="height: 18rem; text-align: center;" formControlName="content"></textarea>
+          
+        </div>
+          
+      </div>
+  </div>
+
 </div>
+
 <div><button type="button" class="btn btn-primary" (click)="submit()">Post</button>
 </div>
 

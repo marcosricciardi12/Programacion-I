@@ -7,7 +7,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { NewpoemComponent } from './pages/newpoem/newpoem.component';
 import { PoemsComponent } from './pages/poems/poems.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ReviewComponent } from './pages/review/review.component';
 import { SingupComponent } from './pages/singup/singup.component';
 import { AuthsessionGuard } from 'src/guards/authsession.guard';
 
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthsessionGuard]},
-  { path: 'review', component: ReviewComponent},
   { path: 'singup', component: SingupComponent},
   { path: 'newpoem', component: NewpoemComponent, canActivate: [AuthsessionGuard]},
   { path: 'abmpoems', component: AbmpoemsComponent, canActivate: [AuthsessionGuard]},

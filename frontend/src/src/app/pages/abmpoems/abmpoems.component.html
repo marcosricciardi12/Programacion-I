@@ -27,7 +27,33 @@
                         <a a [routerLink]="['/poem', poem.user.user, poem.id]">
                             <button class="btn btn-primary" id="button-view" type="button"><i class="fas fa-eye"></i></button>
                         </a>
-                        <button class="btn btn-primary" id="button-edit" type="button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-primary" id="button-edit" (click)="getPoem(poem.id)" type="button" data-bs-toggle="modal" data-bs-target="#editPoem" data-bs-whatever="@getbootstrap"><i class="fas fa-pencil-alt"></i></button>
+                        <div class="modal fade" id="editPoem" tabindex="-1" aria-labelledby="editPoemLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form [formGroup]="editForm">
+                                    <div class="mb-3">
+                                      <label for="recipient-name" class="col-form-label">Titulo:</label>
+                                      <input type="text" class="form-control" id="recipient-name" value = {{title}} formControlName="title">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="message-text" class="col-form-label">Poema:</label>
+                                      <textarea class="form-control" id="message-text" value="{{content}}" formControlName="content" style="height: 16rem;"></textarea>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary" (click)="submitEdit(poem.id)">Editar Poema</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         <button class="btn btn-primary" id="button-delete" type="button" (click)="deletePoem(poem.id)"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>

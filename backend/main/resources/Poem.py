@@ -132,4 +132,5 @@ class Poems(Resource):
             db.session.commit()
             return poem.to_json_short(), 201
         else:
-            return 'Not allowed, you need %d reviews more' % (rest), 405
+            error = {'msg': ('Not allowed, you need %d reviews more to post a new poem' % (rest))}
+            return error, 405

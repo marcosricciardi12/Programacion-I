@@ -79,7 +79,7 @@ export class AbmpoemsComponent implements OnInit {
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: 'Warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
@@ -91,7 +91,7 @@ export class AbmpoemsComponent implements OnInit {
         swalWithBootstrapButtons.fire(
           'Deleted!',
           'Your poem has been deleted.',
-          'success'
+          'Success'
         )
       } else if (
         /* Read more about handling dismissals below */
@@ -142,7 +142,7 @@ export class AbmpoemsComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Tu poema ha sido editado',
+          title: 'Your poem has been edited',
           showConfirmButton: false,
           timer: 3000
         });
@@ -153,7 +153,7 @@ export class AbmpoemsComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: ' No se pudo editar tu poema',
+          title: ' Your poem could not be edited',
           showConfirmButton: false,
           timer: 3500
         });

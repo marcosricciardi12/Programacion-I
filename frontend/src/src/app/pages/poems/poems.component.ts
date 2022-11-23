@@ -103,7 +103,7 @@ get noReview() {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Tu review ha sido publicada',
+          title: 'Your review has been published',
           showConfirmButton: false,
           timer: 3000
         });
@@ -116,7 +116,7 @@ get noReview() {
           Swal.fire({
             position: 'center',
             icon: 'warning',
-            title: 'Ya has hecho una reseña a este poema!', 
+            title: 'You have already reviewed this poem!', 
             showConfirmButton: false,
             timer: 3500
           });
@@ -128,7 +128,7 @@ get noReview() {
           Swal.fire({
             position: 'center',
             icon: 'error',
-            title: 'No se pudo publicar tu review', 
+            title: 'Your review could not be published', 
             showConfirmButton: false,
             timer: 3500
           });
@@ -151,7 +151,7 @@ get noReview() {
         this.make_review({mark, comment, poem_id});
       }
       else{
-        alert("Formulario invalido")
+        alert("Invalid Form")
       }
     }
 

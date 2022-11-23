@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Usuario editado exitosamente',
+          title: 'User edited successfully',
           showConfirmButton: false,
           timer: 3000
         });
@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: ' No se pudo editar',
+          title: ' Error editing',
           showConfirmButton: false,
           timer: 3500
         });
@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Las contraseñas ingresadas no coinciden!',
+          text: 'Passwords do not mach!',
           footer: '<a href="">Why do I have this issue?</a>'
         })
       }
@@ -125,7 +125,7 @@ export class ProfileComponent implements OnInit {
       Swal.fire({
         icon: 'info',
         title: 'Oops...',
-        text: 'Formulario incompleto!',
+        text: 'Incomplete Form!',
         footer: '<a href="">Why do I have this issue?</a>'
       })
     }

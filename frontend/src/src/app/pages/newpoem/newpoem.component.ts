@@ -36,7 +36,7 @@ export class NewpoemComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Tu poema ' + rta.title + ' ha sido publicado',
+          title: 'Your poem ' + rta.title + ' has been published',
           showConfirmButton: false,
           timer: 3000
         });
@@ -70,7 +70,7 @@ export class NewpoemComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Faltan datos en el formulario!'
+            text: 'Missing data!'
           })
       }
     }  

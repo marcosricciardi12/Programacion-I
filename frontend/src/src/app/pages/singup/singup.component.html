@@ -11,10 +11,18 @@
                         </div>
                         <form [formGroup]="registerForm" class="user">
                             <div class="mb-3"><input class="form-control form-control-user" type="text" placeholder="Username" required="" formControlName="user"></div>
-                            <div class="mb-3"><input class="form-control form-control-user" type="email" id="email" placeholder="Email Address" required="" formControlName="email"></div>
+                            <div class="mb-3"><input class="form-control form-control-user" type="email" id="email" placeholder="Email Address" required="" formControlName="email"  [ngClass]="{ 'is-invalid': registerForm.get('email')?.errors }"></div>
+                            <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+                                <p style="color: red;">Please provide a valid email address.</p>
+                                
+                              </div>
                             <div class="row mb-3">
                                 <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="password" placeholder="Password" required="" formControlName="password"></div>
-                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="verifyPassword" placeholder="Repeat Password" required="" formControlName="password2"></div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="verifyPassword" placeholder="Repeat Password" required="" formControlName="password2" [ngClass]="{'is-invalid': registerForm.get('password')?.value != registerForm.get('password2')?.value}">
+                                    <div *ngIf="registerForm.get('password')?.value != registerForm.get('password2')?.value">
+                                        <p style="color: red">Las contraseñas no coinciden</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row mb-3">
                                 <p id="emailErrorMsg" class="text-danger" style="display:none;">Paragraph</p>

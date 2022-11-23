@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { UsersService } from 'src/app/services/users/users.service';
 import Swal from 'sweetalert2';
@@ -38,7 +38,7 @@ export class AbmusersComponent implements OnInit {
     this.getUsers(this.params);
     this.editUserForm = this.formBuilder.group({
       user: [''],
-      email: [''],
+      email: ['', [Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [''],
       password2: [''],
       admin: [false],

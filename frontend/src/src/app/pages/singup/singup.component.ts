@@ -24,7 +24,7 @@ export class SingupComponent implements OnInit {
       user: ['', Validators.required],
       password: ['', Validators.required],
       password2: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       admin: [false],
    });
   }

@@ -57,7 +57,11 @@
                                                     </div>
                                                     <div class="mb-3">
                                                       <label for="message-text" class="col-form-label">Email:</label>
-                                                      <input type="text" class="form-control" id="recipient-name" value="{{email}}" formControlName="email">
+                                                      <input type="text" class="form-control" id="recipient-name" value="{{email}}" formControlName="email" [ngClass]="{'is-invalid': editUserForm.get('email')?.errors}">
+                                                      <div *ngIf="editUserForm.get('email')?.invalid && (editUserForm.get('email')?.dirty || editUserForm.get('email')?.touched)">
+                                                        <p style="color: red;">Please provide a valid email address.</p>
+                                                        
+                                                      </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Password:</label>
@@ -65,7 +69,10 @@
                                                       </div>
                                                       <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Confirm Password:</label>
-                                                        <input type="password" class="form-control" id="recipient-name" formControlName="password2">
+                                                        <input type="password" class="form-control" id="recipient-name" formControlName="password2" [ngClass]="{'is-invalid': editUserForm.get('password')?.value != editUserForm.get('password2')?.value}" autocomplete="disabled">
+                                                        <div *ngIf="editUserForm.get('password')?.value != editUserForm.get('password2')?.value">
+                                                            <p style="color: red">Las contraseñas no coinciden</p>
+                                                        </div>
                                                       </div>
                                                       <div class="mb-3">
                                                         <label for="form-check-input" class="col-form-label">Admin Access:</label>

@@ -9,10 +9,11 @@ import { PoemsComponent } from './pages/poems/poems.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SingupComponent } from './pages/singup/singup.component';
 import { AuthsessionGuard } from 'src/guards/authsession.guard';
-
+import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
 
 const routes: Routes = [
+  
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'abmpoems', component: AbmpoemsComponent, canActivate: [AuthsessionGuard]},
   { path: 'abmusers', component: AbmusersComponent, canActivate: [AuthsessionGuard]},
   { path: 'poem/:user/:id_poem', component: PoemsComponent},
-
+  { path: '**', pathMatch: 'full', component: PagenotfoundComponent },
+  
 ];
 
 @NgModule({

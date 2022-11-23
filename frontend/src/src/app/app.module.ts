@@ -22,7 +22,6 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PoemsComponent } from './pages/poems/poems.component';
 import { LoadingComponent } from './components/loading/loading/loading.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { EditpoemComponent } from './components/editpoem/editpoem/editpoem.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { EditpoemComponent } from './components/editpoem/editpoem/editpoem.compo
     AbmusersComponent,
     UserComponent,
     PoemsComponent,
-    LoadingComponent,
-    EditpoemComponent
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

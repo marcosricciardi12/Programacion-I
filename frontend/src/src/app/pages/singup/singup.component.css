@@ -13,7 +13,9 @@ body {
     background-color: rgba(13,104,240,0.5);
   }
   
-
+.show-error {
+  color: red;
+}
 
   #navdiv {
     margin-bottom: 20px;

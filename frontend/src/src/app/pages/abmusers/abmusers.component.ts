@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router'
 import { UsersService } from 'src/app/services/users/users.service';
 import Swal from 'sweetalert2';
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 
 @Component({
@@ -18,13 +23,26 @@ export class AbmusersComponent implements OnInit {
   params:any = {};
   arrayUsuarios:any;
   paginacion:any = {};
+  user: any;
+  email:any;
+  admin:any;
+  user_id:any;
+  editUserForm!: FormGroup;
   constructor(
     private router: Router,
     private userService: UsersService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.getUsers(this.params);
+    this.editUserForm = this.formBuilder.group({
+      user: [''],
+      email: [''],
+      password: [''],
+      password2: [''],
+      admin: [false],
+   });
   }
 
   getUsers(params: any){
@@ -35,6 +53,17 @@ export class AbmusersComponent implements OnInit {
       this.paginacion.pages = data.pages;
       console.log('Paginacion actual: ', this.paginacion);
     })
+  }
+
+  getUser(user_id:any) {
+    this.userService.getUser(user_id).subscribe((data:any) =>{
+      console.log('JSON data: ', data);
+      this.user = data.user;
+      this.user_id = data.id
+      this.email = data.email
+      this.admin = data.admin
+      console.log(this.admin)
+    });
   }
 
   deleteUser(id: number) {
@@ -108,4 +137,78 @@ export class AbmusersComponent implements OnInit {
     
   }
 
+  submitEditUser(user_id: any) {
+    if (this.editUserForm.valid) {
+      console.log(this.editUserForm.value);
+      // console.log('Credenciales: ', {email, password});
+      if (!this.editUserForm.value.user) {this.editUserForm.value.user = this.user}
+      if (!this.editUserForm.value.email) {this.editUserForm.value.email = this.email}
+      if (!this.editUserForm.value.admin) {this.editUserForm.value.admin = false}
+
+      let user = this.editUserForm.value.user;
+      this.user = this.editUserForm.value.user;
+      let password = this.editUserForm.value.password;
+      let password2 = this.editUserForm.value.password2;
+      let email = this.editUserForm.value.email;
+      this.email = this.editUserForm.value.email;
+      let admin = this.editUserForm.value.admin;
+
+      if (password == password2){
+        if (password) {
+          console.log('params edit user: ' , {user, password, email, admin})
+          this.editUser({user, password, email, admin}, user_id);
+        }
+        else {
+          console.log('params edit user: ' , {user, email, admin})
+          this.editUser({user, email, admin}, user_id);
+        }
+      }
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Las contraseñas ingresadas no coinciden!',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
+    }
+    else{
+      Swal.fire({
+        icon: 'info',
+        title: 'Oops...',
+        text: 'Formulario incompleto!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
+    }
+
+    editUser(params:any, id: number) {
+      this.userService.putUser(params, id).subscribe({
+        next: async (rta) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Usuario editado exitosamente',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          await delay(3001);
+          window.location.reload();
+        }, error: async (error) =>{
+  
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: ' No se pudo editar',
+            showConfirmButton: false,
+            timer: 3500
+          });
+          await delay(3500);
+          console.log('error: ', error);
+        }, complete: () => {
+          console.log('Termino');
+        }
+      })
+      
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoemsService } from 'src/app/services/poems/poems.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import Swal from 'sweetalert2';
 
 function delay(ms: number) {
@@ -20,6 +21,7 @@ export class AbmpoemsComponent implements OnInit {
   editForm!: FormGroup;
   messsagePage:any = {};
   user:any = "";
+  user_id:any = "";
   params:any = {own_poems: true};
   arrayPoems:any;
   paginacion:any = {};
@@ -29,20 +31,29 @@ export class AbmpoemsComponent implements OnInit {
   constructor(
     private router: Router,
     private poemsService: PoemsService,
+    private userService: UsersService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.editForm = this.formBuilder.group({
-      title: [this.title, Validators.required],
-      content: [this.content, Validators.required]
+      title: ['', Validators.required],
+      content: ['', Validators.required]
    });
     let token = localStorage.getItem("token") || "";
     if (token) {
       let decodedJWT = JSON.parse(window.atob(token.split('.')[1]));
       this.user = decodedJWT.user
+      this.user_id = decodedJWT.id
     }
     this.getPoems(this.params)
+  }
+
+  getPoemsUser(id:any) {
+    this.userService.getUser(id).subscribe((data:any) =>{
+      console.log('JSON data: ', data);
+      this.arrayPoems = data.poems;
+    });
   }
 
   getPoems(params:any) {
@@ -132,7 +143,6 @@ export class AbmpoemsComponent implements OnInit {
           position: 'center',
           icon: 'success',
           title: 'Tu poema ha sido editado',
-          text:'titulo nuevo: ' + rta,
           showConfirmButton: false,
           timer: 3000
         });
@@ -158,8 +168,6 @@ export class AbmpoemsComponent implements OnInit {
 
   submitEdit(poem_id: any) {
     console.log('valores form', this.editForm.value)
-    this.editForm.value.title = this.title
-    this.editForm.value.title = this.content
     if (this.editForm.valid) {
         let title = this.editForm.value.title;
         let content = this.editForm.value.content;
@@ -167,7 +175,13 @@ export class AbmpoemsComponent implements OnInit {
         this.editPoem({title, content}, poem_id);
       }
       else{
-        alert("Formulario invalido")
+        if(this.editForm.value.title) {
+          this.editPoem({title: this.editForm.value.title}, poem_id);
+        }
+        if(this.editForm.value.content) {
+          this.editPoem({content: this.editForm.value.content}, poem_id);
+        }
+
       }
     }
 

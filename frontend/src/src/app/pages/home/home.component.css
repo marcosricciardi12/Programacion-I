@@ -25,3 +25,14 @@ body {
 
     top: 0;
 }
+
+#delete {
+    border-color: gray;
+    margin-left: 5px;
+    background-color: var(--bs-gray);
+  }
+  #delete:hover {
+    margin-left: 5px;
+    border-color: black;
+    background-color: var(--bs-red);
+  }

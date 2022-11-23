@@ -55,4 +55,14 @@ export class UsersService {
     return  this.httpClient.post(this.url, dataRegistry, {headers: headers}).pipe(take(1));;
   }
 
+  putUser(params:any, id: any) {
+    let auth_token = localStorage.getItem('token');
+    console.log('put params: ', params)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    });
+    return  this.httpClient.put(this.url_i + "/" + id.toString(), params, {headers: headers});
+  }
+
 }

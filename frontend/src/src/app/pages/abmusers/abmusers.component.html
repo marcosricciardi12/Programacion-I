@@ -41,7 +41,53 @@
                                     <td>{{usr.user}}</td>
                                     <td>{{usr.email}}</td>
                                     <td>{{usr.poem_count}}</td>
-                                    <td><button class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i></button>
+                                    <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal" data-bs-whatever="@getbootstrap" (click) = "getUser(usr.id)"><i class="fas fa-pencil-alt"></i></button>
+                                        <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <form [formGroup]="editUserForm">
+                                                    <div class="mb-3">
+                                                      <label for="recipient-name" class="col-form-label">User:</label>
+                                                      <input type="text" class="form-control" id="recipient-name" value="{{user}}" formControlName="user">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                      <label for="message-text" class="col-form-label">Email:</label>
+                                                      <input type="text" class="form-control" id="recipient-name" value="{{email}}" formControlName="email">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Password:</label>
+                                                        <input type="password" class="form-control" id="recipient-name" formControlName="password">
+                                                      </div>
+                                                      <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Confirm Password:</label>
+                                                        <input type="password" class="form-control" id="recipient-name" formControlName="password2">
+                                                      </div>
+                                                      <div class="mb-3">
+                                                        <label for="form-check-input" class="col-form-label">Admin Access:</label>
+                                                        <div *ngIf="admin == 'True'">
+                                                            <input  class="form-check-input" type="checkbox" [checked]="admin" value="true" id="flexCheckChecked" formControlName="admin" name="admin">
+                                                        </div>
+                                                        <div *ngIf="admin == 'False'">
+                                                            <input class="form-check-input" type="checkbox" [checked]="admin" value="true" id="flexCheckChecked" formControlName="admin" name="admin">
+                                                            No eres admin
+                                                        </div>
+                                                        
+                                                      </div>
+                                                      
+                                                  </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn btn-primary" (click)="submitEditUser(user_id)">Edit user</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
                                         <button class="btn btn-primary" (click)="deleteUser(usr.id)" id="delete" type="button">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>

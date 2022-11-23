@@ -17,6 +17,9 @@ class User(db.Model):
     @plain_password.setter
     def plain_password(self, password):
         self.password = generate_password_hash(password)
+    
+    def change_pass(self, password):
+        return generate_password_hash(password)
 
     def validate_pass(self, password):
         return check_password_hash(self.password, password)

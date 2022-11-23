@@ -52,7 +52,11 @@ class User(Resource):
                     else:
                         print("Only admin can modify admin permisions")
                 else:
-                    setattr(user,key,value)
+                    if str(key) == 'password':
+                        hash = user.change_pass(value)
+                        setattr(user,key,hash)
+                    else:
+                        setattr(user,key,value)
             db.session.add(user)
             db.session.commit()
             return user.to_json(), 201

@@ -79,7 +79,7 @@ export class AbmpoemsComponent implements OnInit {
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: 'Warning',
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
@@ -91,7 +91,7 @@ export class AbmpoemsComponent implements OnInit {
         swalWithBootstrapButtons.fire(
           'Deleted!',
           'Your poem has been deleted.',
-          'Success'
+          'success'
         )
       } else if (
         /* Read more about handling dismissals below */

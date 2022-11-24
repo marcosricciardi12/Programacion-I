@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(dataLogin:any) {
-    console.log('Comprobando credenciales...');
+    console.log('Checking Credentials...');
     this.authService.login(dataLogin).subscribe({
       next: async (rta) => {
         const Toast = Swal.mixin({
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Credenciales incorrectas! Intenta nuevamente'
+          text: 'Wrong credential! Try again'
         })
         console.log('error: ', error);
         localStorage.removeItem('token');
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
         this.login({user, password});
       }
       else{
-        alert("Formulario invalido")
+        alert("Invalid Form")
       }
     }  
 }

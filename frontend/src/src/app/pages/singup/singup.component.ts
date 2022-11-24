@@ -40,13 +40,13 @@ export class SingupComponent implements OnInit {
       if (result.isConfirmed) {
         this.userService.createUser(dataLogin).subscribe({
           next: (rta) => {
-            Swal.fire('Saved!', 'Usuario ' + rta.user + ' creado exitosamente', 'success')
+            Swal.fire('Saved!', 'User ' + rta.user + ' ceated successfully', 'success')
             this.router.navigate(['/abmusers']);
           }, error: (error) =>{
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'No se pudo crear el usuario!',
+              text: 'Error creating user',
               footer: '<a href="">Why do I have this issue?</a>'
             })
             console.log('error: ', error);
@@ -78,7 +78,7 @@ export class SingupComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Las contraseñas ingresadas no coinciden!',
+            text: 'asswords do not mach!',
             footer: '<a href="">Why do I have this issue?</a>'
           })
         }
@@ -87,7 +87,7 @@ export class SingupComponent implements OnInit {
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
-          text: 'Formulario incompleto!',
+          text: 'Incomplete Form!',
           footer: '<a href="">Why do I have this issue?</a>'
         })
       }

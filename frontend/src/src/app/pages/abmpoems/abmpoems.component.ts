@@ -123,7 +123,7 @@ export class AbmpoemsComponent implements OnInit {
   }
 
   getPoem(id: number) {
-    console.log('valores form', this.editForm.value)
+    console.log('valores form', this.editForm.value, 'id poem edit: ' , id)
     this.poemsService.getPoem(id).subscribe((data:any) =>{
       console.log('JSON data: ', data);
       this.title = data.title;
@@ -167,7 +167,7 @@ export class AbmpoemsComponent implements OnInit {
   }
 
   submitEdit(poem_id: any) {
-    console.log('valores form', this.editForm.value)
+    console.log('valores form', this.editForm.value, 'id poem edit: ' , poem_id)
     if (this.editForm.valid) {
         let title = this.editForm.value.title;
         let content = this.editForm.value.content;

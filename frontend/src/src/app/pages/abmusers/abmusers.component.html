@@ -90,7 +90,13 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                  <button type="button" class="btn btn-primary" (click)="submitEditUser(user_id)">Edit user</button>
+                                                  <div *ngIf="!editUserForm.valid || editUserForm.get('password')?.value != editUserForm.get('password2')?.value">
+                                                    <button type="button" class="btn btn-primary disabled">Edit user</button>
+                                                    </div>
+                                                <div *ngIf="editUserForm.valid && editUserForm.get('password')?.value == editUserForm.get('password2')?.value">
+                                                    <button type="button" class="btn btn-primary" (click)="submitEditUser(user_id)">Edit user</button>
+                                                    </div>
+                                                  
                                                 </div>
                                               </div>
                                             </div>

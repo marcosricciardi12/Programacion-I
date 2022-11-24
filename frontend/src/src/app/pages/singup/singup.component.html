@@ -29,7 +29,12 @@
                                 <p id="passwordErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                             </div>
 							<div class="mb-3"><input type="checkbox" value="true" formControlName="admin" name="admin"> Admin access</div>
-							<button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit" (click)="submit()">Register Account</button>
+                            <div *ngIf="!registerForm.valid">
+							    <button class="btn btn-primary d-block btn-user w-100 disabled" id="submitBtn" type="submit" >Register Account</button>
+                                </div>
+                            <div *ngIf="registerForm.valid">
+							    <button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit" (click)="submit()">Register Account</button>
+                                </div>
                             <hr>
                         </form>
                         <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
